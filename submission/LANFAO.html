@@ -1,0 +1,1464 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>หลานเฝ้า — Laan Fao</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--navy:#0f1a2e;--navy-l:#162038;--ivory:#faf8f4;--ivory-d:#f0ede6;
+--teal:#1a9e8f;--teal-l:#22c4b2;--coral:#e8634a;--coral-l:#f0806a;
+--text-d:#1a1a1a;--text-m:#4a4a4a;--text-l:#8a8a8a;--text-w:#e8e8e8;
+--max-w:1160px;--hdr:64px;--r:8px;
+}
+html{scroll-behavior:smooth;font-size:100%;scroll-padding-top:72px}
+body{font-family:'Sarabun',system-ui,-apple-system,sans-serif;font-size:18px;line-height:1.75;color:var(--text-d);background:var(--ivory)}
+/* HEADER */
+.site-hdr{position:sticky;top:0;z-index:100;height:var(--hdr);background:var(--navy);display:flex;align-items:center;padding:0 clamp(16px,4vw,32px)}
+.site-hdr .brand{color:#fff;font-size:20px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
+.site-hdr .brand span{color:var(--teal-l)}
+.site-hdr select{margin-left:auto;background:var(--navy-l);color:var(--text-w);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:6px 28px 6px 10px;font-size:14px;cursor:pointer;max-width:220px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23aaa'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center}
+.site-hdr select:focus{outline:2px solid var(--teal);outline-offset:2px}
+.progress-bar{position:fixed;top:var(--hdr);left:0;width:100%;height:3px;z-index:99;background:rgba(0,0,0,.08)}
+/* SECTIONS */
+.band{padding:clamp(56px,8vw,96px) clamp(16px,4vw,32px)}
+.band-dark{background:var(--navy);color:var(--text-w)}
+.band-dark .sec-sub,.band-dark .text-m{color:rgba(255,255,255,.7)}
+.band-dark .src{color:rgba(255,255,255,.45)}
+.band-dark a{color:var(--teal-l)}
+.band-light{background:var(--ivory)}
+.band-alt{background:var(--ivory-d)}
+.inner{max-width:var(--max-w);margin:0 auto}
+.sec-num{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.band-dark .sec-num{color:var(--teal-l)}
+.sec-title{font-size:clamp(26px,4vw,36px);font-weight:700;line-height:1.25;margin-bottom:8px}
+.sec-sub{font-size:15px;color:var(--text-l);margin-bottom:32px;font-style:italic}
+.src{font-size:13px;color:var(--text-l);margin-top:4px}
+.text-m{color:var(--text-m)}
+blockquote{border-left:4px solid var(--coral);padding:16px 24px;margin:24px 0;font-size:20px;line-height:1.6;font-style:italic;background:rgba(232,99,74,.06);border-radius:0 var(--r) var(--r) 0}
+.band-dark blockquote{background:rgba(232,99,74,.1)}
+/* TABLES */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:24px 0;border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:480px}
+th{text-align:left;font-weight:600;padding:10px 14px;border-bottom:2px solid var(--teal);white-space:nowrap}
+.band-dark th{border-bottom-color:var(--teal-l);color:#fff}
+td{padding:10px 14px;border-bottom:1px solid rgba(0,0,0,.06);vertical-align:top}
+.band-dark td{border-bottom-color:rgba(255,255,255,.08)}
+tr:hover td{background:rgba(26,158,143,.04)}
+.band-dark tr:hover td{background:rgba(26,158,143,.08)}
+/* CARDS */
+.card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin:24px 0}
+.card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--r);padding:24px;transition:box-shadow .15s ease}
+.card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.band-dark .card{background:var(--navy-l);border-color:rgba(255,255,255,.06)}
+.card .card-icon{font-size:28px;margin-bottom:8px}
+.card .card-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--teal);margin-bottom:4px}
+.card .card-val{font-size:22px;font-weight:700;margin-bottom:4px}
+.card .card-desc{font-size:15px;color:var(--text-m)}
+.band-dark .card .card-desc{color:rgba(255,255,255,.65)}
+/* STATUS */
+.st-r{color:#e53e3e;font-weight:700}.st-y{color:#d69e2e;font-weight:700}.st-g{color:#38a169;font-weight:700}
+/* BADGES */
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:13px;font-weight:600}
+.badge-teal{background:rgba(26,158,143,.12);color:var(--teal)}
+.badge-coral{background:rgba(232,99,74,.12);color:var(--coral)}
+.badge-gray{background:rgba(0,0,0,.06);color:var(--text-m)}
+/* HERO */
+.hero{min-height:calc(100vh - var(--hdr));display:flex;align-items:center;background:var(--navy);color:#fff;padding:clamp(40px,8vw,80px) clamp(16px,4vw,32px);position:relative;overflow:hidden}
+.hero .inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,4vw,64px);align-items:center}
+.hero-text h1{font-size:clamp(40px,6vw,64px);font-weight:800;line-height:1.1;margin-bottom:16px}
+.hero-text h1 span{color:var(--teal-l)}
+.hero-text .tagline{font-size:clamp(18px,2.5vw,22px);color:rgba(255,255,255,.8);margin-bottom:32px;line-height:1.5}
+.hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap}
+.hero-cta a{display:inline-block;padding:14px 28px;border-radius:var(--r);font-size:16px;font-weight:600;text-decoration:none;cursor:pointer;min-height:44px;transition:transform .15s ease,box-shadow .15s ease}
+.hero-cta a:focus{outline:2px solid var(--teal-l);outline-offset:3px}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,158,143,.35)}
+.btn-outline{border:2px solid rgba(255,255,255,.3);color:#fff;background:transparent}.btn-outline:hover{border-color:var(--teal-l);color:var(--teal-l)}
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-visual svg{width:100%;max-width:420px;height:auto}
+.hero .src{position:absolute;bottom:16px;left:clamp(16px,4vw,32px);font-size:12px;color:rgba(255,255,255,.35)}
+/* NAV BTNS */
+.nav-btns{display:flex;gap:12px;margin-top:32px}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:var(--r);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;min-height:44px;transition:all .15s ease}
+.nav-btn-light{background:rgba(0,0,0,.05);color:var(--text-d)}.nav-btn-light:hover{background:rgba(0,0,0,.1)}
+.nav-btn-dark{background:rgba(255,255,255,.08);color:var(--text-w)}.nav-btn-dark:hover{background:rgba(255,255,255,.14)}
+.nav-btn:focus{outline:2px solid var(--teal);outline-offset:2px}
+/* DETAILS EXPAND */
+details{margin:16px 0}
+summary{cursor:pointer;font-weight:600;padding:12px 0;list-style:none;display:flex;align-items:center;gap:8px;min-height:44px}
+summary::before{content:'▸';color:var(--teal);transition:transform .2s ease;display:inline-block}
+details[open] summary::before{transform:rotate(90deg)}
+summary:focus{outline:2px solid var(--teal);outline-offset:2px}
+/* DIMENSIONS */
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:24px 0}
+.dim-card{padding:20px;border-radius:var(--r);border-left:4px solid var(--teal)}
+.band-light .dim-card{background:#fff;border-color:var(--teal)}
+.dim-card.dim-red{border-left-color:#e53e3e}
+.dim-card .dim-hd{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-weight:700;font-size:16px}
+.dim-card .dim-body{font-size:15px;color:var(--text-m)}
+/* DEMO (for Part B) */
+.demo-area{background:var(--navy);border-radius:var(--r);padding:clamp(24px,4vw,40px);margin:24px 0}
+.case-btns{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.case-btn{min-height:44px;padding:8px 16px;border-radius:var(--r);border:2px solid rgba(255,255,255,.12);background:transparent;color:var(--text-w);font-size:14px;font-weight:600;cursor:pointer;transition:all .15s ease}
+.case-btn:hover,.case-btn.active{border-color:var(--teal-l);background:rgba(26,158,143,.15)}
+.case-btn:focus{outline:2px solid var(--teal-l);outline-offset:2px}
+.case-btn .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.dot-r{background:#e53e3e}.dot-y{background:#d69e2e}.dot-g{background:#38a169}
+.chart-area{background:var(--navy-l);border-radius:var(--r);padding:24px;margin:16px 0;min-height:200px}
+.chart-area canvas{width:100%;height:180px}
+.dialog-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:16px}
+.dialog-box{background:var(--ivory);color:var(--text-d);border-radius:var(--r);padding:32px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto}
+.dialog-box h3{font-size:20px;margin-bottom:16px}
+.form-check{display:flex;align-items:center;gap:10px;padding:10px 0;min-height:44px;font-size:16px}
+.form-check input[type="checkbox"]{width:20px;height:20px;accent-color:var(--teal)}
+.form-textarea{width:100%;min-height:80px;border:1px solid rgba(0,0,0,.15);border-radius:var(--r);padding:12px;font-size:16px;font-family:inherit;resize:vertical}
+.form-textarea:focus{outline:2px solid var(--teal);border-color:var(--teal)}
+.form-btn{padding:12px 24px;border:none;border-radius:var(--r);font-size:16px;font-weight:600;cursor:pointer;min-height:44px}
+.form-btn-primary{background:var(--teal);color:#fff}.form-btn-cancel{background:rgba(0,0,0,.06);color:var(--text-d)}
+.history-panel{background:rgba(255,255,255,.04);border-radius:var(--r);padding:20px;margin:16px 0}
+.history-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:15px}
+.family-phone{max-width:375px;margin:24px auto;background:#fff;border-radius:24px;padding:24px;box-shadow:0 8px 40px rgba(0,0,0,.15);color:var(--text-d)}
+.family-phone .fp-hdr{text-align:center;font-size:14px;color:var(--text-l);margin-bottom:16px}
+.family-phone .fp-status{text-align:center;font-size:48px;margin:16px 0}
+.family-phone .fp-name{text-align:center;font-size:20px;font-weight:700}
+.family-phone .fp-msg{padding:16px;background:var(--ivory);border-radius:var(--r);margin:16px 0;font-size:15px;line-height:1.6}
+.nurse-counters{display:flex;gap:16px;margin:16px 0;flex-wrap:wrap}
+.nurse-counter{text-align:center;padding:16px 24px;border-radius:var(--r);min-width:80px}
+.nurse-counter .nc-num{font-size:28px;font-weight:800}
+.nurse-counter .nc-label{font-size:13px;margin-top:4px}
+.nc-red{background:rgba(229,62,62,.15);color:#e53e3e}
+.nc-yellow{background:rgba(214,158,46,.15);color:#b7791f}
+.nc-green{background:rgba(56,161,105,.15);color:#276749}
+/* ANIMATION */
+.reveal{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){
+.reveal{animation:revealUp .5s ease-out both}
+@keyframes revealUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+/* MOBILE */
+@media(max-width:768px){
+.hero .inner{grid-template-columns:1fr}
+.hero-visual{order:-1;margin-bottom:16px}
+.hero-visual svg{max-width:280px}
+.dim-grid{grid-template-columns:1fr}
+.card-row{grid-template-columns:1fr}
+table{font-size:14px;min-width:360px}
+}
+@media(max-width:374px){
+body{font-size:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-hdr" role="banner">
+<div class="brand"><span>หลาน</span>เฝ้า</div>
+<select aria-label="เลือกบท" onchange="location.hash='#s'+this.value">
+<option value="">— เลือกบท —</option>
+<option value="1">1 ภาพรวมโครงการ</option>
+<option value="2">2 คำแถลงปัญหา</option>
+<option value="3">3 โซลูชันและโมเดลธุรกิจ</option>
+<option value="4">4 พารามิเตอร์ที่ยืนยัน</option>
+<option value="5">5 ภูมิทัศน์การแข่งขัน</option>
+<option value="6">6 การประเมินความเป็นไปได้</option>
+<option value="7">7 หน้าจอ ขั้นตอน และ Demo</option>
+<option value="8">8 สถาปัตยกรรม</option>
+<option value="9">9 ขอบเขต</option>
+<option value="10">10 เกณฑ์ความสำเร็จ</option>
+<option value="11">11 องค์ประกอบทีม</option>
+<option value="12">12 ไทม์ไลน์</option>
+<option value="13">13 ความเสี่ยงหลัก</option>
+<option value="14">14 สมมติฐานเปิด</option>
+<option value="15">15 บันทึกการตัดสินใจ</option>
+<option value="16">16 Go / No-Go</option>
+<option value="17">17 หลักฐานและแหล่งอ้างอิง</option>
+</select>
+</header>
+<div class="progress-bar" role="presentation"></div>
+
+<!-- HERO -->
+<section class="hero" id="s0">
+<div class="inner">
+<div class="hero-text">
+<h1><span>หลาน</span>เฝ้า</h1>
+<p class="tagline">ระบบเฝ้าระวังสุขภาพผู้สูงอายุด้วยเรดาร์คลื่นมิลลิเมตร<br>เห็นแนวโน้มก่อนล้ม — ไม่ใช้กล้อง ไม่ต้องสวมใส่</p>
+<div class="hero-cta">
+<a class="btn-teal" href="#s1">อ่านเรื่องราว</a>
+<a class="btn-outline" href="#s7">ทดลองเดโม</a>
+</div>
+</div>
+<div class="hero-visual">
+<!-- Original SVG: elderly person at home with radar arcs -->
+<svg viewBox="0 0 420 380" xmlns="http://www.w3.org/2000/svg" aria-label="ภาพประกอบผู้สูงอายุในบ้านกับเรดาร์คลื่นมิลลิเมตร">
+<!-- Room -->
+<rect x="40" y="60" width="340" height="280" rx="12" fill="#1a2a44" stroke="rgba(255,255,255,.08)" stroke-width="1.5"/>
+<!-- Window -->
+<rect x="280" y="80" width="80" height="60" rx="4" fill="#0f1a2e" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+<line x1="320" y1="80" x2="320" y2="140" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+<line x1="280" y1="110" x2="360" y2="110" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+<!-- Floor -->
+<rect x="40" y="300" width="340" height="40" rx="0" fill="#162038"/>
+<!-- Chair -->
+<rect x="220" y="210" width="70" height="8" rx="3" fill="#2a4060"/>
+<rect x="220" y="218" width="8" height="82" rx="2" fill="#2a4060"/>
+<rect x="282" y="218" width="8" height="82" rx="2" fill="#2a4060"/>
+<rect x="282" y="180" width="8" height="38" rx="3" fill="#2a4060"/>
+<!-- Walking cane -->
+<line x1="195" y1="190" x2="190" y2="300" stroke="#8a7a60" stroke-width="3" stroke-linecap="round"/>
+<circle cx="190" cy="302" r="4" fill="#8a7a60"/>
+<!-- Elderly person - warm, detailed -->
+<ellipse cx="160" cy="300" rx="14" ry="5" fill="rgba(0,0,0,.2)"/>
+<!-- Feet -->
+<rect x="148" y="290" width="24" height="10" rx="5" fill="#5a4a3a"/>
+<!-- Legs -->
+<rect x="152" y="248" width="10" height="44" rx="4" fill="#4a6a8a"/>
+<rect x="165" y="250" width="10" height="42" rx="4" fill="#4a6a8a"/>
+<!-- Torso -->
+<rect x="143" y="190" width="38" height="62" rx="8" fill="#e8634a"/>
+<!-- Arms -->
+<rect x="133" y="198" width="10" height="40" rx="4" fill="#daa07a"/>
+<rect x="181" y="196" width="10" height="36" rx="4" fill="#daa07a"/>
+<!-- Hand on cane -->
+<circle cx="194" cy="192" r="5" fill="#daa07a"/>
+<!-- Neck -->
+<rect x="155" y="180" width="14" height="14" rx="4" fill="#daa07a"/>
+<!-- Head -->
+<circle cx="162" cy="168" r="20" fill="#daa07a"/>
+<!-- Hair -->
+<path d="M142 162 Q145 145 162 142 Q179 145 182 162 Q180 155 162 152 Q144 155 142 162z" fill="#c0c0c0"/>
+<!-- Face -->
+<circle cx="155" cy="166" r="2" fill="#4a3a2a"/>
+<circle cx="169" cy="166" r="2" fill="#4a3a2a"/>
+<path d="M155 175 Q162 180 169 175" fill="none" stroke="#4a3a2a" stroke-width="1.5" stroke-linecap="round"/>
+<!-- Glasses -->
+<circle cx="155" cy="166" r="6" fill="none" stroke="#666" stroke-width="1"/>
+<circle cx="169" cy="166" r="6" fill="none" stroke="#666" stroke-width="1"/>
+<line x1="161" y1="166" x2="163" y2="166" stroke="#666" stroke-width="1"/>
+<!-- Radar device on wall -->
+<rect x="72" y="120" width="28" height="18" rx="4" fill="var(--teal)" opacity=".9"/>
+<circle cx="86" cy="129" r="3" fill="#fff" opacity=".8"/>
+<!-- Radar arcs -->
+<path d="M100 129 Q140 100 180 129" fill="none" stroke="var(--teal-l)" stroke-width="1.5" opacity=".25" stroke-dasharray="4 4">
+<animate attributeName="opacity" values=".1;.35;.1" dur="3s" repeatCount="indefinite"/>
+</path>
+<path d="M100 129 Q150 80 200 129" fill="none" stroke="var(--teal-l)" stroke-width="1.2" opacity=".18" stroke-dasharray="4 4">
+<animate attributeName="opacity" values=".08;.25;.08" dur="3s" begin=".5s" repeatCount="indefinite"/>
+</path>
+<path d="M100 129 Q160 60 220 129" fill="none" stroke="var(--teal-l)" stroke-width="1" opacity=".12" stroke-dasharray="4 4">
+<animate attributeName="opacity" values=".05;.18;.05" dur="3s" begin="1s" repeatCount="indefinite"/>
+</path>
+<!-- Small signal dots -->
+<circle cx="130" cy="115" r="2.5" fill="var(--teal-l)" opacity=".4">
+<animate attributeName="opacity" values=".2;.6;.2" dur="2.5s" repeatCount="indefinite"/>
+</circle>
+<circle cx="150" cy="105" r="2" fill="var(--teal-l)" opacity=".3">
+<animate attributeName="opacity" values=".15;.5;.15" dur="2.5s" begin=".8s" repeatCount="indefinite"/>
+</circle>
+<!-- Status indicator floating -->
+<rect x="60" y="80" width="50" height="24" rx="12" fill="var(--teal)" opacity=".85"/>
+<text x="85" y="96" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">0.72 m/s</text>
+</svg>
+</div>
+</div>
+<p class="src">AI for All Thailand Innovation Sprint · v7 · สร้างด้วย Amazon Quick AI · สมมติฐานแยกจากหลักฐาน · demo เป็นข้อมูลจำลอง</p>
+</section>
+
+<!-- §1 ภาพรวมโครงการ -->
+<section class="band band-light" id="s1">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 1</span>
+<h2 class="sec-title">ภาพรวมโครงการ</h2>
+<p class="sec-sub">Concept-stage ambient radar system routing health risk scores to community volunteer visit queues — no prototype exists.</p>
+<p>หลานเฝ้ามุ่งหวังเปลี่ยนการดูแลผู้สูงอายุในชนบทไทยจากระบบ "รู้เมื่อล้มแล้ว" ไปสู่ "เห็นแนวโน้มก่อนล้ม" ด้วยเรดาร์คลื่นมิลลิเมตรที่ไม่ใช้กล้องติดตั้งภายในบ้าน ตรวจวัดข้อมูลสุขภาพเชิงพฤติกรรมอย่างต่อเนื่อง แปลงเป็นสัญญาณจัดลำดับความเร่งด่วน แล้วส่งเข้าคิวให้อาสาสมัครสาธารณสุขประจำหมู่บ้าน (อสม.) เยี่ยมบ้านเชิงรุก</p>
+<p class="src">[source: participant]</p>
+<div class="card-row" style="margin-top:32px">
+<div class="card">
+<div class="card-icon">👥</div>
+<div class="card-label">ทีม</div>
+<div class="card-val">4 คน</div>
+<div class="card-desc">วิศวกรรมคอมพิวเตอร์ 3 · หุ่นยนต์ 1</div>
+</div>
+<div class="card">
+<div class="card-icon">📋</div>
+<div class="card-label">สถานะ</div>
+<div class="card-val">แนวคิด</div>
+<div class="card-desc">ไม่มีต้นแบบ ยังไม่มีผลทดสอบ</div>
+</div>
+<div class="card">
+<div class="card-icon">🧪</div>
+<div class="card-label">สมมติฐาน</div>
+<div class="card-val">A1–A12</div>
+<div class="card-desc">อนุมัติ 2026-11-04 เพื่อทดสอบ</div>
+</div>
+</div>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s2">ถัดไป: คำแถลงปัญหา →</a></div>
+</div>
+</section>
+
+<!-- §2 คำแถลงปัญหา -->
+<section class="band band-dark" id="s2">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 2</span>
+<h2 class="sec-title">คำแถลงปัญหา</h2>
+<p class="sec-sub">Participant observes that elderly decline is often detected only after adverse events; existing tools may face rural access barriers.</p>
+<blockquote>"ระบบสุขภาพไทยจะรู้จักผู้สูงอายุคนหนึ่ง ก็ต่อเมื่อเขาล้มแล้ว ป่วยแล้ว หรือมาถึงโรงพยาบาลแล้ว"<br><span style="font-size:14px;opacity:.7">— ผู้เข้าร่วม [source: participant, verbatim]</span></blockquote>
+<p style="margin-top:32px">ปัญหาที่ผู้เข้าร่วมอธิบายมีสามด้านหลัก:</p>
+<div class="card-row" style="margin-top:24px">
+<div class="card">
+<div class="card-icon">📸</div>
+<div class="card-label">ภาพนิ่งแทนแนวโน้ม</div>
+<div class="card-desc">การตรวจ ADL และ Timed Up and Go ปีละ 1–2 ครั้ง เห็นแค่ภาพชั่วขณะ ไม่เห็นแนวโน้มการเสื่อมถอย</div>
+</div>
+<div class="card">
+<div class="card-icon">🏠</div>
+<div class="card-label">เยี่ยมแบบหว่านแห</div>
+<div class="card-desc">อสม. เยี่ยมทุกบ้านเท่ากัน ไม่มีข้อมูลจัดลำดับว่าบ้านไหนเร่งด่วน</div>
+</div>
+<div class="card">
+<div class="card-icon">⌚</div>
+<div class="card-label">อุปสรรคเทคโนโลยี</div>
+<div class="card-desc">Smartwatch หรือ Smart Home อาจมีอุปสรรคด้านการชาร์จ สมาร์ตโฟน Wi-Fi และทักษะดิจิทัล</div>
+</div>
+</div>
+<p class="src">[source: participant]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s1">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s3">ถัดไป: โซลูชัน →</a></div>
+</div>
+</section>
+
+<!-- §3 โซลูชันและโมเดลธุรกิจ -->
+<section class="band band-light" id="s3">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 3</span>
+<h2 class="sec-title">โซลูชันและโมเดลธุรกิจ</h2>
+<p class="sec-sub">Four-layer sense-predict-act-connect loop with all pricing as untested hypotheses.</p>
+
+<details>
+<summary>คำศัพท์ที่ใช้ในเอกสาร</summary>
+<p style="padding:8px 0;font-size:15px">ความเร็วการเดิน (gait speed) หน่วย m/s · เวลาลุกจากที่นั่ง (sit-to-stand, STS) หน่วยวินาที · การเคลื่อนไหวกลางคืน (night movement) หน่วยครั้งต่อคืน · ค่าพื้นฐาน (baseline) คือค่าอ้างอิงเฉพาะบุคคลจากข้อมูลช่วงแรก <span class="src">[source: reviewer]</span></p>
+</details>
+
+<h3 style="font-size:20px;margin:32px 0 16px;font-weight:700">วงจรการทำงาน 4 ชั้น</h3>
+<p>เรดาร์ 60 GHz ในบ้าน ประมวลผลบนตัวเครื่อง ส่งค่าสรุป (ความเร็วการเดิน เวลาลุกจากที่นั่ง รูปแบบกลางคืน ตรวจจับการล้ม) ผ่าน NB-IoT → cloud สร้างค่าพื้นฐาน วิเคราะห์แนวโน้ม → สัญญาณ 🟢🟡🔴 → อสม. คิวเยี่ยม → ครอบครัว LINE OA</p>
+<p class="src">[source: participant]</p>
+
+<p style="margin-top:24px"><strong>ข้อกำหนดสำคัญ:</strong> ไม่มีระบบสั่งการฉุกเฉินอัตโนมัติ (C7) · สัญญาณชีพไม่อยู่ใน MVP (C6) · ค่าขีดแบ่งทุกค่าเป็นข้อเสนอที่ยังไม่พิสูจน์ (C8) · การเคลื่อนไหวกลางคืนเป็นรูปแบบเชิงพฤติกรรม ไม่ใช่การวินิจฉัย (C19)</p>
+<p class="src">[source: participant + reviewer]</p>
+
+<h3 style="font-size:20px;margin:32px 0 16px;font-weight:700">ทางเลือกฮาร์ดแวร์</h3>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ทางเลือก</th><th>จุดเด่น</th><th>ข้อแลกเปลี่ยน</th></tr></thead>
+<tbody>
+<tr><td>TI IWR6843 Eval Kit</td><td>SDK พร้อม เริ่มเร็ว</td><td>ขนาดใหญ่</td></tr>
+<tr><td>OEM Module</td><td>ขนาดเล็กกว่า</td><td>SDK ขึ้นกับผู้ผลิต</td></tr>
+<tr><td>Custom PCB</td><td>เต็มรูปแบบ</td><td>ต้อง RF design นาน เหมาะผลิตจำนวนมาก</td></tr>
+</tbody>
+</table>
+</div>
+<p>เริ่ม Eval Kit เฟส 0 <span class="src">[source: participant]</span></p>
+
+<h3 style="font-size:20px;margin:32px 0 16px;font-weight:700">โมเดลธุรกิจ</h3>
+<p class="text-m" style="margin-bottom:16px">ทุกช่องทางเป็นสมมติฐาน</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ช่องทาง</th><th>ลูกค้า/ผู้จ่าย</th><th>มูลค่าที่เสนอ</th><th>สถานะ</th></tr></thead>
+<tbody>
+<tr><td>B2G</td><td>รพ.สต./อปท. → งบท้องถิ่น</td><td>150–250 บาท/เดือน/บ้าน</td><td><span class="badge badge-coral">สมมติฐาน (A11)</span></td></tr>
+<tr><td>B2C Family</td><td>ครอบครัว</td><td>ดูแลทางไกล</td><td><span class="badge badge-gray">ยังไม่ทราบ</span></td></tr>
+<tr><td>B2B Enterprise</td><td>ประกัน/senior living</td><td>ลดเคลม</td><td><span class="badge badge-gray">ยังไม่เจรจา</span></td></tr>
+<tr><td>กองทุน LTC</td><td>สปสช.</td><td>เฝ้าระวังต่อเนื่อง</td><td><span class="badge badge-coral">ไม่ยืนยัน (A5)</span></td></tr>
+<tr><td>True partnership</td><td>Revenue sharing</td><td>NB-IoT ร่วม</td><td><span class="badge badge-coral">โอกาส (A10, C4)</span></td></tr>
+</tbody>
+</table>
+</div>
+<p>ต้นทุนวัสดุประมาณ 2,000–3,000 บาทต่อหน่วย ค่า NB-IoT/cloud/ติดตั้ง/certification ไม่ทราบ จุดคุ้มทุนคำนวณไม่ได้ ต้องผ่าน gate ทุกเฟส รวมแผนฝึก อสม. และบำรุงรักษา (R8)</p>
+<p class="src">[source: assumption]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s2">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s4">ถัดไป: พารามิเตอร์ →</a></div>
+</div>
+</section>
+
+<!-- §4 พารามิเตอร์ที่ยืนยัน -->
+<section class="band band-dark" id="s4">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 4</span>
+<h2 class="sec-title">พารามิเตอร์ที่ยืนยัน</h2>
+<p class="sec-sub">All thresholds are proposed targets — none have been tested or validated.</p>
+<p style="margin-bottom:24px">คำว่า "ยืนยัน" หมายถึงผู้เข้าร่วมระบุไว้ ไม่ใช่การพิสูจน์ทางวิทยาศาสตร์ <span class="src">[source: participant]</span></p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>พารามิเตอร์</th><th>ค่า</th><th>หมายเหตุ</th></tr></thead>
+<tbody>
+<tr><td>เรดาร์</td><td>60 GHz (TI IWR6843)</td><td>ผู้เข้าร่วมเลือก</td></tr>
+<tr><td>ตัวชี้วัด MVP</td><td>ความเร็วการเดิน, ลุกจากที่นั่ง, กลางคืน, ล้ม</td><td>สัญญาณชีพไม่อยู่ใน MVP (C6)</td></tr>
+<tr><td>สัญญาณสี</td><td>🟢🟡🔴</td><td>ค่าขีดแบ่งยังไม่พิสูจน์ (C8)</td></tr>
+<tr><td>การเชื่อมต่อ</td><td>NB-IoT เป็น transport</td><td>ความครอบคลุมไม่ยืนยัน (A2)</td></tr>
+<tr><td>ฉุกเฉิน</td><td>มนุษย์ตัดสินใจเท่านั้น</td><td>ไม่มีระบบอัตโนมัติ (C7)</td></tr>
+<tr><td>Pilot</td><td>เฟส 0: 2–3 บ้าน → เฟส 1: 15–25 บ้าน</td><td>เป้า 100 บ้านระยะยาว</td></tr>
+<tr><td>False alarm</td><td>ไม่เกิน 1 ครั้ง/บ้าน/สัปดาห์</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>Sensitivity</td><td>อย่างน้อย 90%</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>เยี่ยมเหลือง</td><td>ภายใน 72 ชั่วโมง เป้า 80%</td><td><span class="badge badge-coral">proposed</span></td></tr>
+</tbody>
+</table>
+</div>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s3">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s5">ถัดไป: การแข่งขัน →</a></div>
+</div>
+</section>
+
+<!-- §5 ภูมิทัศน์การแข่งขัน -->
+<section class="band band-light" id="s5">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 5</span>
+<h2 class="sec-title">ภูมิทัศน์การแข่งขัน</h2>
+<p class="sec-sub">Six competitors mapped; proposed differentiation is the radar-to-visit-queue closed loop.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ผลิตภัณฑ์</th><th>ประเภท</th><th>หมายเหตุ</th></tr></thead>
+<tbody>
+<tr><td>Vayyar Care</td><td>เรดาร์ 60 GHz ตรวจล้ม+presence</td><td>ใช้ใน senior living ต่างประเทศ ราคาไม่ทราบ</td></tr>
+<tr><td>Walabot Home</td><td>เรดาร์ 3D ครอบคลุม 1 ห้อง</td><td>ตัวอย่างในอดีต ความพร้อมจำหน่ายปัจจุบันไม่ทราบ</td></tr>
+<tr><td>SEMAS (สิงคโปร์)</td><td>เซ็นเซอร์แวดล้อม PIR/ประตู/เตียง</td><td>ที่มาหน่วยงานไม่ยืนยัน แยกจาก True</td></tr>
+<tr><td>True/Intel</td><td>นำร่องดูแลผู้สูงอายุไทย</td><td>รายละเอียดไม่ยืนยัน (C11)</td></tr>
+<tr><td>Apple Watch</td><td>Wearable ตรวจล้ม</td><td>อุปสรรคชาร์จ ราคา ทักษะ</td></tr>
+<tr><td>Garmin</td><td>Wearable สุขภาพ</td><td>ผู้เข้าร่วมกล่าวถึง spec ไม่ทราบ</td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin-top:16px">ความแตกต่างที่เสนอคือการเชื่อมสัญญาณเรดาร์เข้าคิวจัดลำดับเยี่ยมบ้านของ อสม. แบบครบวงจร ในการค้นหาไม่พบตัวอย่าง แต่ขอบเขตการค้นหามีจำกัด</p>
+<p class="src">[source: research report, participant]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s4">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s6">ถัดไป: ความเป็นไปได้ →</a></div>
+</div>
+</section>
+
+<!-- §6 การประเมินความเป็นไปได้ -->
+<section class="band band-dark" id="s6">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 6</span>
+<h2 class="sec-title">การประเมินความเป็นไปได้</h2>
+<p class="sec-sub">Seven dimensions: two red (finance, budget), five yellow; ORCATECH supports concept but does not validate our technology.</p>
+<div class="dim-grid">
+<div class="dim-card" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-y">🟡</span> เทคนิค</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">SDK มี แต่ยังไม่ได้ยืนยันความแม่นของระบบนี้ในบ้านจริง; multi-person ยาก (C10) <span class="src">[source: research report]</span></div>
+</div>
+<div class="dim-card" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-y">🟡</span> ตลาด</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">ปัญหาชัด ยังไม่พิสูจน์ความต้องการจริง <span class="src">[source: participant]</span></div>
+</div>
+<div class="dim-card dim-red" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-r">🔴</span> การเงิน</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">ต้นทุนเป็นประมาณการ รายได้เป็นสมมติฐาน LTC ไม่ยืนยัน <span class="src">[source: assumption]</span></div>
+</div>
+<div class="dim-card" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-y">🟡</span> ปฏิบัติการ</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">ทีม 4 คน เฟส 0 ได้ เฟส 1 ต้องพันธมิตร True เป็นโอกาส (C4) <span class="src">[source: assumption]</span></div>
+</div>
+<div class="dim-card" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-y">🟡</span> กฎหมาย</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">อย. ไม่ชัดเจน (C5) PDPA consent ต้อง privacy review <span class="src">[source: assumption]</span></div>
+</div>
+<div class="dim-card" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-y">🟡</span> ทรัพยากร</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">เฟส 0 ประเมินทักษะ เฟส 1 ต้องที่ปรึกษา (มีเงื่อนไขตามผลเฟส 0) <span class="src">[source: assumption]</span></div>
+</div>
+<div class="dim-card dim-red" style="background:var(--navy-l)">
+<div class="dim-hd"><span class="st-r">🔴</span> งบประมาณ</div>
+<div class="dim-body" style="color:rgba(255,255,255,.7)">ไม่ระบุทุกเฟส <span class="src">[source: assumption]</span></div>
+</div>
+</div>
+
+<details style="margin-top:24px">
+<summary style="color:var(--teal-l)">หลักฐานสนับสนุนเชิงแนวคิด: ORCATECH</summary>
+<p style="padding:12px 0;font-size:15px;color:rgba(255,255,255,.75)">ORCATECH (Oregon) เป็นงานเชิงสังเกตใช้ PIR สนับสนุนแนวคิดวัดความเร็วการเดินต่อเนื่อง แต่ไม่ validate mmWave DOI ไม่ตรวจสอบ (C21) เกณฑ์ 0.1 m/s มาจากวรรณกรรมวัดระยะหลายเดือน การใช้ใน 3–4 สัปดาห์เป็น extrapolation ไม่ validated (C8) <span class="src">[source: research report]</span></p>
+</details>
+
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s5">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s7">ถัดไป: Demo →</a></div>
+</div>
+</section>
+
+<!-- END PART A -->
+
+<!-- LANFAO-B.html — append after removing 
+<!-- LANFAO PATCH — insert verbatim before </body> after existing </script> -->
+<style>
+/* (1) Filter buttons row */
+.filter-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{min-height:44px;padding:8px 16px;border-radius:8px;border:2px solid rgba(255,255,255,.12);background:transparent;color:#e8e8e8;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s ease,background .15s ease}
+.filter-btn:hover,.filter-btn.f-active{border-color:#22c4b2;background:rgba(26,158,143,.15)}
+.filter-btn:focus{outline:2px solid #22c4b2;outline-offset:2px}
+.filter-btn .fdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.fdot-r{background:#e53e3e}.fdot-y{background:#d69e2e}.fdot-g{background:#38a169}.fdot-a{background:linear-gradient(135deg,#e53e3e,#d69e2e,#38a169)}
+.filter-status{font-size:13px;color:rgba(255,255,255,.55);margin:4px 0 8px;min-height:18px}
+/* (2) viewsGrid mobile */
+@media(max-width:768px){
+#viewsGrid{grid-template-columns:1fr !important;gap:24px}
+.demo-area{padding:16px}
+.dialog-box{padding:20px;margin:8px}
+}
+/* (3) Contrast fixes for muted text on navy */
+.band-dark .src,.band-dark .text-m{color:rgba(255,255,255,.6) !important}
+.band-dark .sec-sub{color:rgba(255,255,255,.65) !important}
+#chartWrap text{fill:rgba(255,255,255,.65)}
+#chartLabel{color:rgba(255,255,255,.55) !important}
+#whyBox{color:#5ee8d8 !important}
+.history-item span{color:rgba(255,255,255,.9) !important}
+.history-item p{color:rgba(255,255,255,.6) !important}
+/* (5) Reveal — content visible by default, animation progressive */
+.reveal{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){
+.p-reveal{animation:pReveal .45s ease-out both}
+@keyframes pReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+/* (4) Demo details collapse */
+.demo-preinfo{margin-bottom:16px}
+.demo-preinfo summary{color:#1a9e8f;font-weight:700;font-size:16px;min-height:44px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 0}
+.demo-preinfo summary::before{content:'▸';display:inline-block;transition:transform .2s ease;color:#1a9e8f}
+.demo-preinfo[open] summary::before{transform:rotate(90deg)}
+.demo-preinfo summary:focus{outline:2px solid #1a9e8f;outline-offset:2px}
+/* Focus trap dialog highlight */
+.dialog-box :focus{outline:2px solid #1a9e8f;outline-offset:2px}
+</style>
+
+<script>
+(function(){
+"use strict";
+/* === (1) FILTER BUTTONS === */
+var FILTER_MAP={
+all:null,
+r:["LF-001"],
+y:["LF-002","LF-003","LF-005"],
+g:["LF-004","LF-006"]
+};
+var FILTER_LABELS={
+all:{icon:"fdot-a",text:"ทั้งหมด (6)",status:"แสดงทุกเคส: 1🔴 3🟡 2🟢"},
+r:{icon:"fdot-r",text:"🔴 เร่งด่วน (1)",status:"LF-001 ยายสมศรี — ล้มวันที่ 27"},
+y:{icon:"fdot-y",text:"🟡 เฝ้าระวัง (3)",status:"LF-002 ตาประสิทธิ์ · LF-003 ยายบุญมี · LF-005 ยายนวล"},
+g:{icon:"fdot-g",text:"🟢 ปกติ (2)",status:"LF-004 ตาสมชาย · LF-006 ตาเฉลิม (กำลังเรียนรู้ค่าพื้นฐาน)"}
+};
+var caseBtns=document.getElementById("caseBtns");
+if(!caseBtns)return;
+var filterRow=document.createElement("div");
+filterRow.className="filter-row";
+filterRow.setAttribute("role","group");
+filterRow.setAttribute("aria-label","กรองตามสถานะ");
+var statusEl=document.createElement("div");
+statusEl.className="filter-status";
+statusEl.setAttribute("aria-live","polite");
+var activeFilter="all";
+
+["all","r","y","g"].forEach(function(key){
+var b=document.createElement("button");
+b.type="button";b.className="filter-btn";
+b.setAttribute("data-filter",key);
+var d=document.createElement("span");
+d.className="fdot "+FILTER_LABELS[key].icon;
+b.appendChild(d);
+b.appendChild(document.createTextNode(FILTER_LABELS[key].text));
+b.addEventListener("click",function(){applyFilter(key);});
+filterRow.appendChild(b);
+});
+
+caseBtns.parentNode.insertBefore(filterRow,caseBtns);
+caseBtns.parentNode.insertBefore(statusEl,caseBtns);
+
+function applyFilter(key){
+activeFilter=key;
+var ids=FILTER_MAP[key];
+var btns=caseBtns.querySelectorAll("button");
+btns.forEach(function(btn){
+var label=btn.getAttribute("aria-label")||"";
+var caseId=label.split(" ")[0];
+if(!ids){btn.style.display="";return;}
+btn.style.display=ids.indexOf(caseId)>=0?"":"none";
+});
+filterRow.querySelectorAll(".filter-btn").forEach(function(fb){
+fb.classList.toggle("f-active",fb.getAttribute("data-filter")===key);
+});
+statusEl.textContent=FILTER_LABELS[key].status;
+}
+applyFilter("all");
+
+/* === (4) MOVE PRE-DEMO CONTENT INTO DETAILS === */
+var demoEl=document.getElementById("demo");
+if(demoEl){
+var parent=demoEl.parentNode;
+var candidates=[];
+var node=parent.firstElementChild;
+var collecting=false;
+while(node){
+if(node.tagName==="H3"&&!collecting){
+var txt=node.textContent||"";
+if(txt.indexOf("แดชบอร์ด")>=0)collecting=true;
+}
+if(collecting&&node===demoEl)break;
+if(collecting)candidates.push(node);
+node=node.nextElementSibling;
+}
+if(candidates.length>0){
+var det=document.createElement("details");
+det.className="demo-preinfo";
+var sum=document.createElement("summary");
+sum.textContent="รายละเอียดการสาธิต";
+det.appendChild(sum);
+parent.insertBefore(det,demoEl);
+candidates.forEach(function(c){det.appendChild(c);});
+}
+}
+
+/* === (2) FOCUS TRAP FOR DIALOG === */
+var overlay=document.getElementById("dlgOverlay");
+var dlgBox=document.getElementById("dlgBox");
+if(overlay&&dlgBox){
+overlay.addEventListener("keydown",function(ev){
+if(ev.key!=="Tab")return;
+var focusable=dlgBox.querySelectorAll('button,input,textarea,[tabindex]:not([tabindex="-1"])');
+if(focusable.length===0)return;
+var first=focusable[0];
+var last=focusable[focusable.length-1];
+if(ev.shiftKey){
+if(document.activeElement===first){ev.preventDefault();last.focus();}
+}else{
+if(document.activeElement===last){ev.preventDefault();first.focus();}
+}
+});
+}
+
+/* === (5) REVEAL ANIMATION — progressive === */
+var rm=window.matchMedia("(prefers-reduced-motion: reduce)");
+if(!rm.matches){
+var revEls=document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+var obs=new IntersectionObserver(function(entries){
+entries.forEach(function(e){
+if(e.isIntersecting){e.target.classList.add("p-reveal");obs.unobserve(e.target);}
+});
+},{threshold:0.08});
+revEls.forEach(function(el){obs.observe(el);});
+}else{
+revEls.forEach(function(el){el.classList.add("p-reveal");});
+}
+}
+})();
+</script>
+<!-- END PATCH -->
+
+</body></html> from Part A -->
+<!-- §7 หน้าจอ ขั้นตอน และ Demo -->
+<section class="band band-light" id="s7">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 7</span>
+<h2 class="sec-title">หน้าจอ ขั้นตอน และ Demo</h2>
+<p class="sec-sub">Full 6-case interactive demo with editorial design, validation workflow, three user views, and eight practical ethics actions.</p>
+
+<details>
+<summary>คำศัพท์เพิ่มเติม</summary>
+<p style="padding:8px 0;font-size:15px">ความเร็วการเดิน แสดงเป็น m/s · การเคลื่อนไหวกลางคืน แสดงเป็นครั้งต่อคืน · เวลาลุกจากที่นั่ง แสดงเป็นวินาที <span class="src">[source: reviewer]</span></p>
+</details>
+
+<h3 style="font-size:20px;margin:24px 0 12px;font-weight:700">แดชบอร์ด อสม. (4 หน้าจอ)</h3>
+<ul style="margin:0 0 16px 20px;font-size:16px;line-height:1.8">
+<li><strong>(A1) คิวจัดลำดับ</strong> — 6 เคส 🔴→🟡→🟢 กรอง 4 ปุ่ม ข้อมูลจำลอง</li>
+<li><strong>(A2) โปรไฟล์ผู้สูงอายุ</strong> — กราฟ 28 วัน (LF-006=7 วัน) 3 ตัวชี้วัด baseline = mean 7 จุดแรก ± ค่าเผื่อคงที่ กล่อง "ทำไมจัดลำดับนี้?" ป้าย "สีไม่ใช่การรับประกันทางคลินิก"</li>
+<li><strong>(A3) ขั้นตอนเยี่ยมบ้าน</strong> — checklist 6 รายการ + บันทึกบังคับ → validation (≥1 check + ข้อความไม่ว่าง) อสม. รวบรวมข้อมูล บุคลากรคลินิกตัดสินใจการรักษา</li>
+<li><strong>(A4) ประวัติการเยี่ยม</strong> — สีเปลี่ยนจากเซ็นเซอร์เท่านั้น ไม่ใช่จากการเยี่ยม</li>
+</ul>
+<p style="font-size:15px"><strong>ครอบครัว LINE OA:</strong> สถานะผูกกับเคสที่เลือก ไม่มีปุ่มฉุกเฉิน (C7) · <strong>พยาบาล รพ.สต.:</strong> aggregate 1🔴 3🟡 2🟢 <span class="src">[source: participant]</span></p>
+
+<details>
+<summary>ข้อมูลจำลอง 6 เคส (ตารางอ้างอิง)</summary>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>รหัส</th><th>นามแฝง</th><th>อายุ</th><th>สี</th><th>การเดิน m/s</th><th>กลางคืน</th><th>ลุกจากที่นั่ง วินาที</th><th>เหตุการณ์</th></tr></thead>
+<tbody>
+<tr><td>LF-001</td><td>ยายสมศรี</td><td>78</td><td><span class="st-r">🔴</span></td><td>0.72→0.58</td><td>3→5</td><td>12→15</td><td>ล้มวันที่ 27</td></tr>
+<tr><td>LF-002</td><td>ตาประสิทธิ์</td><td>82</td><td><span class="st-y">🟡</span></td><td>0.65→0.51</td><td>2→3</td><td>14→17</td><td>การเดินลดลง</td></tr>
+<tr><td>LF-003</td><td>ยายบุญมี</td><td>71</td><td><span class="st-y">🟡</span></td><td>0.80→0.76</td><td>4→7</td><td>11→12</td><td>กลางคืนเพิ่มกะทันหัน</td></tr>
+<tr><td>LF-004</td><td>ตาสมชาย</td><td>75</td><td><span class="st-g">🟢</span></td><td>0.85→0.83</td><td>2→2</td><td>10→10</td><td>ปกติ</td></tr>
+<tr><td>LF-005</td><td>ยายนวล</td><td>88</td><td><span class="st-y">🟡</span></td><td>0.60→0.57</td><td>3→4</td><td>14→19</td><td>ลุกจากที่นั่งเพิ่ม</td></tr>
+<tr><td>LF-006</td><td>ตาเฉลิม</td><td>69</td><td><span class="st-g">🟢 กำลังเรียนรู้</span></td><td>0.90→0.89</td><td>1→1</td><td>9→9</td><td>ค่าพื้นฐาน 7 วัน</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+
+<details>
+<summary>สูตรสร้างข้อมูลและค่าพื้นฐาน</summary>
+<p style="padding:8px 0;font-size:15px">value(d) = start + (end−start) × (d−1)/27 สำหรับ d=1..28 · LF-001 ล้ม=discrete วันที่ 27 · LF-003 กลางคืน=step (d1–14=4, d15–28=7) · LF-006 แสดง d=1..7 endpoint=start+(end−start)×6/27 · baseline = mean(d1..d7) ± เผื่อคงที่ (การเดิน ±0.05 m/s · กลางคืน ±1 ครั้ง · ลุกจากที่นั่ง ±2 วินาที) · <strong>ข้อมูลจำลอง ไม่ใช่เกณฑ์คลินิก</strong></p>
+</details>
+
+<p style="margin:16px 0;font-size:15px"><strong>การควบคุม Demo:</strong> ↑↓←→ เลื่อนดู · Esc ปิด dialog ยกเลิก draft (ไม่ล้างประวัติ) · ปุ่ม reset เฉพาะล้าง demo · ไม่มี persistence เมื่อรีเฟรชข้อมูลจะล้าง</p>
+
+<!-- INTERACTIVE DEMO -->
+<div class="demo-area" id="demo" role="region" aria-label="Demo แดชบอร์ด อสม.">
+<p style="color:var(--teal-l);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">(A1) คิวจัดลำดับ — ข้อมูลจำลองทั้งหมด</p>
+<div class="case-btns" id="caseBtns" role="group" aria-label="เลือกเคส"></div>
+<div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap" id="metricBtns" role="group" aria-label="เลือกตัวชี้วัด"></div>
+<div id="chartWrap" style="background:var(--navy-l);border-radius:8px;padding:16px;margin:12px 0;position:relative">
+<svg id="chart" viewBox="0 0 640 260" style="width:100%;height:auto" aria-label="กราฟแนวโน้ม" role="img"></svg>
+<p id="chartLabel" style="text-align:center;font-size:12px;color:rgba(255,255,255,.5);margin-top:4px">ข้อมูลจำลองเท่านั้น — สีไม่ใช่การรับประกันทางคลินิก</p>
+</div>
+<div id="whyBox" style="background:rgba(26,158,143,.1);border:1px solid rgba(26,158,143,.25);border-radius:8px;padding:16px;margin:12px 0;font-size:14px;color:var(--teal-l)"></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin:16px 0">
+<button type="button" class="form-btn form-btn-primary" id="visitBtn" style="font-family:inherit">เยี่ยมบ้านเคสนี้</button>
+<button type="button" class="form-btn form-btn-cancel" id="resetBtn" style="font-family:inherit;color:#fff;background:rgba(255,255,255,.08)">Reset Demo</button>
+</div>
+<div id="historyPanel" class="history-panel" style="display:none" aria-label="ประวัติการเยี่ยม">
+<p style="font-weight:700;font-size:14px;margin-bottom:8px;color:var(--teal-l)">(A4) ประวัติการเยี่ยม</p>
+<div id="historyList"></div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px" id="viewsGrid">
+<div>
+<p style="font-weight:700;font-size:14px;margin-bottom:8px;color:var(--teal-l)">ครอบครัว LINE OA</p>
+<div class="family-phone" id="familyPhone"><div class="fp-hdr">LINE OA — หลานเฝ้า</div><div class="fp-status" id="fpStatus"></div><div class="fp-name" id="fpName"></div><div class="fp-msg" id="fpMsg"></div></div>
+</div>
+<div>
+<p style="font-weight:700;font-size:14px;margin-bottom:8px;color:var(--teal-l)">พยาบาล รพ.สต.</p>
+<div class="nurse-counters" id="nurseCtr">
+<div class="nurse-counter nc-red"><div class="nc-num">1</div><div class="nc-label">🔴 เร่งด่วน</div></div>
+<div class="nurse-counter nc-yellow"><div class="nc-num">3</div><div class="nc-label">🟡 เฝ้าระวัง</div></div>
+<div class="nurse-counter nc-green"><div class="nc-num">2</div><div class="nc-label">🟢 ปกติ</div></div>
+</div>
+<p style="font-size:13px;color:rgba(255,255,255,.5);margin-top:8px">aggregate จากชุดข้อมูลเดียวกัน สอดคล้องกับข้อมูลที่ อสม. และครอบครัวเห็น</p>
+</div>
+</div>
+</div>
+
+<!-- VISIT DIALOG -->
+<div class="dialog-overlay" id="dlgOverlay" role="dialog" aria-modal="true" aria-label="บันทึกเยี่ยมบ้าน">
+<div class="dialog-box" id="dlgBox">
+<h3 id="dlgTitle">บันทึกเยี่ยมบ้าน</h3>
+<p style="font-size:14px;color:var(--text-l);margin-bottom:16px">อสม. รวบรวมข้อมูล — บุคลากรคลินิกตัดสินใจการรักษา</p>
+<div id="dlgChecks">
+<label class="form-check"><input type="checkbox" name="vc" value="0"> ประเมินสภาพ</label>
+<label class="form-check"><input type="checkbox" name="vc" value="1"> รวบรวมรายการยาเพื่อส่งต่อ</label>
+<label class="form-check"><input type="checkbox" name="vc" value="2"> ความปลอดภัยในบ้าน</label>
+<label class="form-check"><input type="checkbox" name="vc" value="3"> แนะนำออกกำลังกายตามแผนผู้เชี่ยวชาญ</label>
+<label class="form-check"><input type="checkbox" name="vc" value="4"> ส่งต่อ รพ.สต.</label>
+<label class="form-check"><input type="checkbox" name="vc" value="5"> อื่นๆ</label>
+</div>
+<p style="font-weight:600;margin:16px 0 8px">บันทึกข้อสังเกต (จำเป็น)</p>
+<textarea class="form-textarea" id="dlgNote" placeholder="พิมพ์ข้อสังเกตที่นี่..." style="font-family:inherit"></textarea>
+<div id="dlgErr" role="alert" style="color:#e53e3e;font-size:14px;min-height:20px;margin:8px 0"></div>
+<div style="display:flex;gap:8px;margin-top:12px">
+<button type="button" class="form-btn form-btn-primary" id="dlgSave" style="font-family:inherit">บันทึก</button>
+<button type="button" class="form-btn form-btn-cancel" id="dlgCancel" style="font-family:inherit">ยกเลิก</button>
+</div>
+</div>
+</div>
+
+<h3 style="font-size:20px;margin:32px 0 12px;font-weight:700">จริยธรรม AI 8 ด้าน</h3>
+<div class="card-row">
+<div class="card"><div class="card-label">1. Attribution</div><div class="card-desc">ทุก claim มี source tag เนื้อหา AI ระบุชัดเจน</div></div>
+<div class="card"><div class="card-label">2. Truthfulness</div><div class="card-desc">แยกหลักฐาน สมมติฐาน ข้อเสนอชัดเจน</div></div>
+<div class="card"><div class="card-label">3. Misinformation</div><div class="card-desc">proposed/simulated มีป้ายกำกับทุกจุด</div></div>
+<div class="card"><div class="card-label">4. Privacy</div><div class="card-desc">ประมวลผลบนตัวเครื่อง ไม่มีกล้อง/ไมโครโฟน มีแผน privacy review</div></div>
+<div class="card"><div class="card-label">5. Fairness</div><div class="card-desc">ลดอุปสรรคการเข้าถึงสำหรับผู้สูงอายุชนบท</div></div>
+<div class="card"><div class="card-label">6. Explainability</div><div class="card-desc">กล่อง "ทำไมจัดลำดับนี้?" แสดง factors อธิบายได้</div></div>
+<div class="card"><div class="card-label">7. Intellectual Property</div><div class="card-desc">ภาพประกอบเป็นงานต้นฉบับ ไม่คัดลอก</div></div>
+<div class="card"><div class="card-label">8. Human Responsibility</div><div class="card-desc">ระบบอัตโนมัติมีเฉพาะชั้นตรวจจับ (sensing) การตัดสินใจดูแลรักษาเป็นของมนุษย์ทั้งหมด</div></div>
+</div>
+<p class="src">[source: participant + reviewer]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s6">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s8">ถัดไป: สถาปัตยกรรม →</a></div>
+</div>
+</section>
+
+<!-- §8 สถาปัตยกรรม -->
+<section class="band band-dark" id="s8">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 8</span>
+<h2 class="sec-title">สถาปัตยกรรม</h2>
+<p class="sec-sub">On-device radar processing → cellular transport → cloud risk scoring → human-operated visit queue → family notifications.</p>
+<div class="card-row">
+<div class="card"><div class="card-icon">📡</div><div class="card-label">Sense</div><div class="card-desc">TI IWR6843 60 GHz → point cloud → MCU → ค่าสรุป 4 รายการ (การเดิน ลุกจากที่นั่ง กลางคืน ล้ม) → NB-IoT/LTE-M (transport)</div></div>
+<div class="card"><div class="card-icon">🧠</div><div class="card-label">Predict</div><div class="card-desc">cloud สร้างค่าพื้นฐาน 2–3 สัปดาห์ (A6) → แนวโน้ม → 🟢🟡🔴 ค่าขีดแบ่งข้อเสนอ (C8)</div></div>
+<div class="card"><div class="card-icon">🏥</div><div class="card-label">Act</div><div class="card-desc">อสม. dashboard → คิว → เยี่ยม → บันทึก → รพ.สต. มนุษย์ตัดสินใจ ไม่มี auto dispatch (C7)</div></div>
+<div class="card"><div class="card-icon">👨‍👩‍👧</div><div class="card-label">Connect</div><div class="card-desc">ครอบครัว LINE OA สถานะ+แจ้งเตือน ไม่มีปุ่มฉุกเฉิน</div></div>
+</div>
+<p class="src">[source: participant]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s7">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s9">ถัดไป: ขอบเขต →</a></div>
+</div>
+</section>
+
+<!-- §9 ขอบเขต -->
+<section class="band band-light" id="s9">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 9</span>
+<h2 class="sec-title">ขอบเขต (MoSCoW)</h2>
+<p class="sec-sub">MoSCoW scope preserves human decision-making at every stage.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>ระดับ</th><th>รายการ</th></tr></thead>
+<tbody>
+<tr><td><span class="badge badge-coral">Must</span></td><td>ตรวจจับการล้ม · ความเร็วการเดิน · เวลาลุกจากที่นั่ง · กลางคืน · สัญญาณ 🟢🟡🔴 · เยี่ยมบ้านโดยมนุษย์ · NB-IoT · demo พร้อมป้ายกำกับ</td></tr>
+<tr><td><span class="badge badge-teal">Should</span></td><td>แสดงแนวโน้มข้อมูล · LINE OA ครอบครัว · แดชบอร์ดพยาบาล</td></tr>
+<tr><td><span class="badge badge-gray">Could</span></td><td>สัญญาณชีพในอนาคต (C6) · หลายห้อง · เชื่อม HIS</td></tr>
+<tr><td><span style="background:rgba(229,62,62,.1);color:#e53e3e" class="badge">Won't</span></td><td>ระบบสั่งการอัตโนมัติ (C7) · วินิจฉัยโรค · กล้อง/ไมโครโฟน · Custom PCB เฟส 0 · ทดสอบล้มจริงกับผู้สูงอายุ</td></tr>
+</tbody>
+</table>
+</div>
+<p class="src">[source: participant]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s8">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s10">ถัดไป: เกณฑ์ความสำเร็จ →</a></div>
+</div>
+</section>
+
+<!-- §10 เกณฑ์ความสำเร็จ -->
+<section class="band band-dark" id="s10">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 10</span>
+<h2 class="sec-title">เกณฑ์ความสำเร็จ</h2>
+<p class="sec-sub">Seven KPIs across three phases — all targets are proposed and subject to validation.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>เฟส</th><th>ตัวชี้วัด</th><th>หน่วย</th><th>เป้าหมาย</th><th>สถานะ</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>Fall sensitivity</td><td>ร้อยละ</td><td>≥90%</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>0</td><td>False alarm</td><td>ครั้ง/บ้าน/สัปดาห์</td><td>≤1</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>1a</td><td>Baseline สำเร็จ 2–3 สัปดาห์</td><td>บ้าน</td><td>TBD</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>1a</td><td>Gait trend stability</td><td>เทียบ baseline</td><td>TBD</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>1b</td><td>เยี่ยมเหลืองภายใน 72 ชม.</td><td>ร้อยละ</td><td>80%</td><td><span class="badge badge-coral">proposed</span></td></tr>
+<tr><td>1b</td><td>สัดส่วนเยี่ยมที่นำไปสู่การดำเนินการ</td><td>ร้อยละ (action/เยี่ยมทั้งหมด)</td><td>TBD</td><td><span class="badge badge-gray">ต้องมีข้อมูลจริง</span></td></tr>
+<tr><td>1b</td><td>ภาวะผิดปกติใหม่ที่แพทย์ยืนยัน</td><td>จำนวนภาวะ (แพทย์ยืนยัน)</td><td>TBD</td><td><span class="badge badge-gray">ต้องมีข้อมูลจริง</span></td></tr>
+</tbody>
+</table>
+</div>
+<p>ต้องผ่าน gate ทุกเฟส (clinical/consent/funding/NB-IoT/safety/regulatory) <span class="src">[source: participant]</span></p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s9">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s11">ถัดไป: ทีม →</a></div>
+</div>
+</section>
+
+<!-- §11 องค์ประกอบทีม -->
+<section class="band band-light" id="s11">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 11</span>
+<h2 class="sec-title">องค์ประกอบทีม</h2>
+<p class="sec-sub">Four proposed roles with seven RACI activities; three critical advisory gaps must be filled before Phase 1.</p>
+<p>เสาหลัก Health &amp; Aging Society — นักศึกษาปริญญาตรี 4 คน (วิศวกรรมคอมพิวเตอร์ 3 หุ่นยนต์ 1) ทักษะจริงต้องประเมินเมื่อเริ่มเฟส 0 <span class="src">[source: participant]</span></p>
+<div class="card-row" style="margin:24px 0">
+<div class="card"><div class="card-label">Radar/Firmware</div><div class="card-desc">point cloud จาก IWR6843 · TinyML</div></div>
+<div class="card"><div class="card-label">Backend/Edge-Cloud</div><div class="card-desc">NB-IoT · risk engine · API</div></div>
+<div class="card"><div class="card-label">Frontend/UX</div><div class="card-desc">อสม. PWA · LINE OA · demo</div></div>
+<div class="card"><div class="card-label">Systems/Test</div><div class="card-desc">สถาปัตยกรรม · ทดสอบ · เอกสาร</div></div>
+</div>
+<details>
+<summary>ตาราง RACI (ตัวเอียง = ยังไม่มีตัวบุคคล)</summary>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>กิจกรรม</th><th>R</th><th>A</th><th>C</th><th>I</th></tr></thead>
+<tbody>
+<tr><td>Radar signal processing</td><td>Radar</td><td>Radar</td><td>Systems</td><td>Backend</td></tr>
+<tr><td>Fall detection model</td><td>Radar</td><td>Systems</td><td><em>ที่ปรึกษาคลินิก</em></td><td>Backend</td></tr>
+<tr><td>Risk engine</td><td>Backend</td><td>Backend</td><td><em>คลินิก, สาธารณสุข</em></td><td>Frontend</td></tr>
+<tr><td>Dashboard อสม.</td><td>Frontend</td><td>Frontend</td><td><em>สาธารณสุข</em></td><td>Backend</td></tr>
+<tr><td>Threshold ค่าขีดแบ่ง</td><td><em>ที่ปรึกษาคลินิก</em></td><td><em>ที่ปรึกษาคลินิก</em></td><td>Systems</td><td>ทุกคน</td></tr>
+<tr><td>PDPA และ consent</td><td>Systems</td><td>Systems</td><td><em>ที่ปรึกษากฎหมาย</em></td><td>ทุกคน</td></tr>
+<tr><td>เอกสารโครงการ</td><td>Frontend</td><td>Systems</td><td>ทุกคน</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<p style="margin-top:16px"><span class="st-r">🔴</span> ที่ปรึกษาคลินิก (ไม่มี) · <span class="st-r">🔴</span> ผู้เชี่ยวชาญสาธารณสุข (ไม่มี) · <span class="st-y">🟡</span> ที่ปรึกษา PDPA (ไม่มี) — ทั้งหมดต้องหาก่อนเฟส 1 <span class="src">[source: participant + reviewer]</span></p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s10">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s12">ถัดไป: ไทม์ไลน์ →</a></div>
+</div>
+</section>
+
+<!-- §12 ไทม์ไลน์ -->
+<section class="band band-dark" id="s12">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 12</span>
+<h2 class="sec-title">ไทม์ไลน์</h2>
+<p class="sec-sub">Twelve-month conditional timeline; every phase transition requires passing all gates.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>เฟส</th><th>ช่วง</th><th>กิจกรรมหลัก</th><th>ทรัพยากร</th><th>ความพร้อม</th></tr></thead>
+<tbody>
+<tr><td><strong>0</strong></td><td>เดือน 0–4</td><td>ต้นแบบ eval kit 2–3 บ้านจำลอง ประเมินทักษะ</td><td>ทีม 4 คน งบไม่ระบุ</td><td><span class="badge badge-teal">มีเงื่อนไข</span></td></tr>
+<tr><td><strong>1a</strong></td><td>เดือน 4–8</td><td>ติดตั้งจริง 15–25 บ้าน 1 ตำบล สร้างค่าพื้นฐาน</td><td>ที่ปรึกษา+รพ.สต.+NB-IoT+consent+safety+งบ</td><td><span class="badge badge-coral">ต้องผ่าน gate 0</span></td></tr>
+<tr><td><strong>1b</strong></td><td>เดือน 8–12</td><td>Act layer เปิดใช้ วัดตัวชี้วัด 3 รายการ</td><td>Act metrics operational</td><td><span class="badge badge-coral">ต้องผ่าน gate 1a</span></td></tr>
+</tbody>
+</table>
+</div>
+<p>เฟส 0 เริ่มแบบมีเงื่อนไข งบประมาณไม่ระบุทุกเฟส <span class="src">[source: participant, assumption]</span></p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s11">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s13">ถัดไป: ความเสี่ยง →</a></div>
+</div>
+</section>
+
+<!-- §13 ความเสี่ยงหลัก -->
+<section class="band band-light" id="s13">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 13</span>
+<h2 class="sec-title">ความเสี่ยงหลัก</h2>
+<p class="sec-sub">Eight risks: two critical (accuracy, clinical advisor), six moderate; all pilot gates currently unmet.</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>#</th><th>ความเสี่ยง</th><th>ระดับ</th><th>บรรเทา</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>ความแม่นยำจริงต่ำกว่า lab → false alarm บ่อย</td><td><span class="st-r">🔴</span></td><td>เฟส 0 วัดจริง gate ≤1/สัปดาห์</td></tr>
+<tr><td>R2</td><td>ไม่มี clinician → threshold ไม่เหมาะ</td><td><span class="st-r">🔴</span></td><td>ที่ปรึกษาก่อนเฟส 1</td></tr>
+<tr><td>R3</td><td>อย. จัดเป็นเครื่องมือแพทย์</td><td><span class="st-y">🟡</span></td><td>สอบถาม อย. (C5)</td></tr>
+<tr><td>R4</td><td>NB-IoT ไม่ครอบคลุม</td><td><span class="st-y">🟡</span></td><td>สำรวจก่อนเลือกตำบล</td></tr>
+<tr><td>R5</td><td>ผู้สูงอายุไม่ยินยอม</td><td><span class="st-y">🟡</span></td><td>consent ร่วมผู้เชี่ยวชาญ</td></tr>
+<tr><td>R6</td><td>LTC ซื้อ IoT ไม่ได้</td><td><span class="st-y">🟡</span></td><td>ยืนยัน สปสช.</td></tr>
+<tr><td>R7</td><td>Multi-person ล้มเหลว</td><td><span class="st-y">🟡</span></td><td>เริ่มบ้าน 1 คน</td></tr>
+<tr><td>R8</td><td>ทีมเล็ก ไม่มีแผนฝึก/บำรุงรักษา</td><td><span class="st-y">🟡</span></td><td>จำกัด scope วางแผน</td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin-top:12px">Pilot gates ยังไม่พร้อม: clinical ✗ · consent ✗ · funding ✗ · NB-IoT ✗ · safety ✗ · regulatory ✗ <span class="src">[source: participant + research report]</span></p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s12">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s14">ถัดไป: สมมติฐาน →</a></div>
+</div>
+</section>
+
+<!-- §14 สมมติฐานเปิด -->
+<section class="band band-dark" id="s14">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 14</span>
+<h2 class="sec-title">สมมติฐานเปิด</h2>
+<p class="sec-sub">Twelve open assumptions accepted as hypotheses — A7 is an unvalidated extrapolation; A9 requires labelled reference data.</p>
+<p style="margin-bottom:16px">ทั้งหมดยอมรับเพื่อทดสอบ ไม่ใช่ข้อเท็จจริง <span class="src">[source: participant final approval]</span></p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>#</th><th>สมมติฐาน</th><th>วิธีทดสอบ</th><th>เมื่อไร</th></tr></thead>
+<tbody>
+<tr><td>A1</td><td>เรดาร์ mmWave วัด 4 ตัวชี้วัด (การเดิน ลุกจากที่นั่ง กลางคืน ล้ม) ได้ในบ้านจริง</td><td>eval kit เทียบ reference observations + timed walk test ไม่ใช้กล้อง</td><td>เฟส 0</td></tr>
+<tr><td>A2</td><td>NB-IoT ครอบคลุมชนบทเป้าหมาย</td><td>สำรวจสัญญาณจริง</td><td>ก่อนเฟส 1</td></tr>
+<tr><td>A3</td><td>อสม. ยอมรับระบบคิวจัดลำดับ</td><td>สังเกต+สัมภาษณ์</td><td>เฟส 1b</td></tr>
+<tr><td>A4</td><td>ต้นทุนวัสดุ 2,000–3,000 บาท/หน่วย</td><td>ใบเสนอราคาจริง</td><td>เฟส 0</td></tr>
+<tr><td>A5</td><td>กองทุน LTC จัดซื้อเฝ้าระวังได้</td><td>สอบถาม สปสช.</td><td>ก่อน B2G</td></tr>
+<tr><td>A6</td><td>ค่าพื้นฐาน 2–3 สัปดาห์เพียงพอ</td><td>เทียบค่าพื้นฐานต่างระยะ</td><td>เฟส 1a</td></tr>
+<tr><td>A7</td><td>ตรวจจับลดลง &gt;0.1 m/s ใน 3–4 สัปดาห์ — extrapolation จากวรรณกรรมระยะหลายเดือน</td><td>clinical validation ร่วมที่ปรึกษา</td><td>ร่วมที่ปรึกษา</td></tr>
+<tr><td>A8</td><td>ผู้สูงอายุยินยอมติดตั้งเรดาร์</td><td>informed consent</td><td>ก่อนเฟส 1</td></tr>
+<tr><td>A9</td><td>TinyML บนตัวเครื่องแม่นยำพอ</td><td>เทียบ labelled reference; edge/cloud เสริมแต่ต้องวัดจาก label</td><td>เฟส 0</td></tr>
+<tr><td>A10</td><td>MOU True–สธ. ใช้ประโยชน์ได้ (≠อนุญาต)</td><td>เจรจา True</td><td>ต้องเจรจา</td></tr>
+<tr><td>A11</td><td>B2G 150–250 บาท/เดือน อปท. ยอมจ่าย</td><td>สอบถาม อปท.</td><td>ต้องตรวจสอบ</td></tr>
+<tr><td>A12</td><td>สถานะ อย. ไม่ชัดเจน มีแผน privacy review</td><td>สอบถาม อย.</td><td>ต้องสอบถาม</td></tr>
+</tbody>
+</table>
+</div>
+<p class="src">ทุกแถว: [source: assumption] [status: unconfirmed]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s13">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s15">ถัดไป: การตัดสินใจ →</a></div>
+</div>
+</section>
+
+<!-- §15 บันทึกการตัดสินใจ -->
+<section class="band band-light" id="s15">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 15</span>
+<h2 class="sec-title">บันทึกการตัดสินใจ</h2>
+<p class="sec-sub">Nine decisions and eighteen corrections ensuring evidence integrity throughout.</p>
+<details open>
+<summary>การตัดสินใจ 9 รายการ</summary>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>#</th><th>การตัดสินใจ</th><th>เหตุผล</th></tr></thead>
+<tbody>
+<tr><td>D1</td><td>เลือก Health &amp; Aging</td><td>ตรงทักษะ+ความสนใจ</td></tr>
+<tr><td>D2</td><td>12 เดือน 2–3→15–25 บ้าน</td><td>พิสูจน์แนวคิด</td></tr>
+<tr><td>D3</td><td>Act metrics เป้า TBD</td><td>ต้องข้อมูลจริง</td></tr>
+<tr><td>D4</td><td>อนุมัติ scope</td><td>ครบมิติ</td></tr>
+<tr><td>D5</td><td>สัญญาณชีพออก MVP (C6)</td><td>จำกัดขอบเขต</td></tr>
+<tr><td>D6</td><td>ไม่มี auto dispatch (C7)</td><td>ความปลอดภัย</td></tr>
+<tr><td>D7</td><td>รัน Stage 2–7 ทั้งหมด</td><td>โครงการใหม่</td></tr>
+<tr><td>D8</td><td>Deep Research + corrections</td><td>ตรวจสอบหลักฐาน</td></tr>
+<tr><td>D9</td><td>ปรับปรุงล่าสุดเป็น v7</td><td>ความสอดคล้องเชิงข้อเท็จจริง</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<details>
+<summary>การแก้ไข 18 รายการ (C4–C21)</summary>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>#</th><th>การแก้ไข</th><th>เหตุผล</th></tr></thead>
+<tbody>
+<tr><td>C4</td><td>True เป็นโอกาส ไม่ใช่พันธมิตร</td><td>ไม่อ้างเกินจริง [reviewer]</td></tr>
+<tr><td>C5</td><td>อย. ไม่ชัดเจนไม่ใช่ยกเว้น</td><td>ป้องกันอ้างยกเว้น [reviewer]</td></tr>
+<tr><td>C6</td><td>สัญญาณชีพเป็นแผนอนาคต</td><td>จำกัดขอบเขต [participant]</td></tr>
+<tr><td>C7</td><td>ไม่มี auto dispatch</td><td>ความปลอดภัย [participant]</td></tr>
+<tr><td>C8</td><td>ค่าขีดแบ่งเป็นข้อเสนอ</td><td>ป้องกันอ้างคลินิก [reviewer]</td></tr>
+<tr><td>C9</td><td>ค้นคว้าเท่านั้น</td><td>ทรัพยากรจำกัด [participant]</td></tr>
+<tr><td>C10</td><td>ลบ universal negative</td><td>พิสูจน์ไม่ได้ [reviewer]</td></tr>
+<tr><td>C11</td><td>True/Intel ไม่ยืนยัน</td><td>ไม่มีแหล่งสาธารณะ [reviewer]</td></tr>
+<tr><td>C12</td><td>ลบตัวเลข LTC</td><td>ไม่ตรวจสอบ [reviewer]</td></tr>
+<tr><td>C13</td><td>ลบราคา Vayyar</td><td>ราคาเปลี่ยนได้ [reviewer]</td></tr>
+<tr><td>C14</td><td>B2C ภาษาเป็นกลาง</td><td>ป้องกันอคติ [participant]</td></tr>
+<tr><td>C15</td><td>4 ชั้น cellular=transport</td><td>สะท้อนการออกแบบ [participant]</td></tr>
+<tr><td>C16</td><td>คำพูดตรงตามต้นฉบับ</td><td>ความถูกต้อง [participant]</td></tr>
+<tr><td>C17</td><td>ลบสถิติไม่ตรวจสอบ</td><td>ป้องกัน misinformation [reviewer]</td></tr>
+<tr><td>C18</td><td>ค่าพื้นฐาน demo ค่าเผื่อคงที่</td><td>demo ไม่ใช่คลินิก [reviewer]</td></tr>
+<tr><td>C19</td><td>กลางคืนเป็นพฤติกรรม ไม่ใช่วินิจฉัย</td><td>ป้องกันตีความแพทย์ [reviewer]</td></tr>
+<tr><td>C20</td><td>URL เป็นจุดเริ่มค้นหา</td><td>แยกอ้างอิงกับ verify [reviewer]</td></tr>
+<tr><td>C21</td><td>ORCATECH เป็นงานเชิงสังเกต</td><td>ไม่ validate เทคโนโลยี [reviewer]</td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<p class="src">[source: participant + reviewer]</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s14">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s16">ถัดไป: Go/No-Go →</a></div>
+</div>
+</section>
+
+<!-- §16 Go / No-Go -->
+<section class="band band-dark" id="s16">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 16</span>
+<h2 class="sec-title">Go / No-Go</h2>
+<p class="sec-sub">Conditional go: clear problem, existing infrastructure, matched skills — seven conditions must hold.</p>
+<div style="background:rgba(26,158,143,.12);border:2px solid var(--teal);border-radius:8px;padding:24px;margin-bottom:24px">
+<p style="font-size:22px;font-weight:800;color:var(--teal-l);margin-bottom:8px">CONDITIONAL GO</p>
+<p style="color:rgba(255,255,255,.85)">แนะนำเริ่มพัฒนาต้นแบบแบบมีเงื่อนไข — หลานเฝ้าตอบปัญหาชัดเจน ผูกเข้ากับโครงสร้าง อสม. และ รพ.สต. ที่มีอยู่ ทีมมีพื้นฐานตรงสาขาสำหรับเฟส 0</p>
+</div>
+<p style="font-weight:700;margin-bottom:12px">เงื่อนไข 7 ข้อ:</p>
+<ol style="margin:0 0 16px 24px;line-height:2;font-size:16px">
+<li>เฟส 0 ต้องวัดผลจริงก่อนอ้างตัวเลข</li>
+<li>ต้องหาที่ปรึกษาคลินิกก่อนกำหนดค่าขีดแบ่ง</li>
+<li>ไม่อ้างว่าผ่านการพิสูจน์จนกว่าจะทดสอบจริง</li>
+<li>ไม่อ้างสิทธิ์กองทุน LTC จนกว่าจะยืนยัน สปสช.</li>
+<li>ไม่มีระบบสั่งการฉุกเฉินอัตโนมัติ</li>
+<li>ไม่ทดสอบการล้มจริงกับผู้สูงอายุ</li>
+<li>clinical, consent, funding, connectivity, safety, regulatory ต้องพร้อมก่อน pilot</li>
+</ol>
+<p>สมมติฐาน A1–A12 ยอมรับเพื่อทดสอบเท่านั้น <span class="src">[source: participant final approval]</span></p>
+<div class="nav-btns"><a class="nav-btn nav-btn-dark" href="#s15">← ก่อนหน้า</a><a class="nav-btn nav-btn-dark" href="#s17">ถัดไป: หลักฐาน →</a></div>
+</div>
+</section>
+
+<!-- §17 หลักฐานและแหล่งอ้างอิง -->
+<section class="band band-light" id="s17">
+<div class="inner reveal">
+<span class="sec-num">บทที่ 17</span>
+<h2 class="sec-title">หลักฐานและแหล่งอ้างอิง</h2>
+<p class="sec-sub">Source tags, URL entrypoints, and evidence gaps.</p>
+<p style="margin-bottom:16px"><strong>ระบบ source tag:</strong> [source: participant] ผู้เข้าร่วมระบุ · [source: participant, verbatim] คำพูดตรง · [source: research report] Deep Research bdd5aac6 · [source: assumption] A1–A12 · [source: entrypoint] URL จุดเริ่มค้นหา · [source: reviewer] การแก้ไขโดย reviewer</p>
+<div class="tbl-wrap">
+<table>
+<thead><tr><th>แหล่ง</th><th>URL</th></tr></thead>
+<tbody>
+<tr><td>TI IWR6843</td><td><a href="https://www.ti.com/product/IWR6843" style="color:var(--teal)">ti.com/product/IWR6843</a></td></tr>
+<tr><td>Vayyar Care</td><td><a href="https://vayyar.com/care" style="color:var(--teal)">vayyar.com/care</a></td></tr>
+<tr><td>Walabot Home</td><td><a href="https://walabot.com/walabot-home" style="color:var(--teal)">walabot.com/walabot-home</a></td></tr>
+<tr><td>ORCATECH</td><td><a href="https://www.ohsu.edu/oregon-center-for-aging-and-technology" style="color:var(--teal)">ohsu.edu/orcatech</a></td></tr>
+<tr><td>Apple Watch Fall</td><td><a href="https://support.apple.com/en-us/108896" style="color:var(--teal)">support.apple.com/108896</a></td></tr>
+<tr><td>สปสช.</td><td><a href="https://www.nhso.go.th" style="color:var(--teal)">nhso.go.th</a></td></tr>
+<tr><td>อย.</td><td><a href="https://www.fda.moph.go.th" style="color:var(--teal)">fda.moph.go.th</a></td></tr>
+<tr><td>PDPC</td><td><a href="https://www.pdpc.or.th" style="color:var(--teal)">pdpc.or.th</a></td></tr>
+</tbody>
+</table>
+</div>
+<p style="margin-top:12px"><strong>ช่องว่าง:</strong> True/Intel ไม่มี URL สาธารณะ · SEMAS ที่มาไม่ยืนยัน · ORCATECH DOI ไม่ตรวจสอบ · Garmin spec ไม่ทราบ</p>
+<p style="margin-top:24px;padding:16px;background:var(--ivory-d);border-radius:8px;font-size:14px;color:var(--text-m)">สร้างด้วย Amazon Quick AI · ทุก claim มี source tag · สมมติฐานแยกจากหลักฐาน · demo เป็นข้อมูลจำลอง · มนุษย์ตัดสินใจทุกขั้นตอน</p>
+<div class="nav-btns"><a class="nav-btn nav-btn-light" href="#s16">← ก่อนหน้า</a><a class="nav-btn nav-btn-light" href="#s0">↑ กลับด้านบน</a></div>
+</div>
+</section>
+
+<script>
+(function(){
+"use strict";
+/* === DATA === */
+var CASES=[
+{id:"LF-001",name:"ยายสมศรี",age:78,color:"r",label:"🔴",gait:[.72,.58],night:[3,5],sts:[12,15],event:"ล้มวันที่ 27",days:28,nightStep:false,fall:true},
+{id:"LF-002",name:"ตาประสิทธิ์",age:82,color:"y",label:"🟡",gait:[.65,.51],night:[2,3],sts:[14,17],event:"การเดินลดลง",days:28,nightStep:false,fall:false},
+{id:"LF-003",name:"ยายบุญมี",age:71,color:"y",label:"🟡",gait:[.80,.76],night:[4,7],sts:[11,12],event:"กลางคืนเพิ่มกะทันหัน",days:28,nightStep:true,fall:false},
+{id:"LF-004",name:"ตาสมชาย",age:75,color:"g",label:"🟢",gait:[.85,.83],night:[2,2],sts:[10,10],event:"ปกติ",days:28,nightStep:false,fall:false},
+{id:"LF-005",name:"ยายนวล",age:88,color:"y",label:"🟡",gait:[.60,.57],night:[3,4],sts:[14,19],event:"ลุกจากที่นั่งเพิ่ม",days:28,nightStep:false,fall:false},
+{id:"LF-006",name:"ตาเฉลิม",age:69,color:"g",label:"🟢 กำลังเรียนรู้",gait:[.90,.89],night:[1,1],sts:[9,9],event:"ค่าพื้นฐาน 7 วัน",days:7,nightStep:false,fall:false}
+];
+var METRICS=[
+{key:"gait",name:"ความเร็วการเดิน",unit:"m/s",tol:.05,dec:2},
+{key:"night",name:"กลางคืน",unit:"ครั้ง/คืน",tol:1,dec:0},
+{key:"sts",name:"ลุกจากที่นั่ง",unit:"วินาที",tol:2,dec:0}
+];
+var CHECKS=["ประเมินสภาพ","รวบรวมรายการยาเพื่อส่งต่อ","ความปลอดภัยในบ้าน","แนะนำออกกำลังกายตามแผนผู้เชี่ยวชาญ","ส่งต่อ รพ.สต.","อื่นๆ"];
+var ORDER=[0,2,1,4,3,5];
+var selCase=0, selMetric=0;
+var history=[];
+var dlgOpen=false, dlgCase=-1;
+var reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function genValues(c,mk){
+var m=METRICS[mk];var r=c[m.key];var s=r[0],e=r[1];var n=c.days;var vals=[];
+for(var d=1;d<=n;d++){
+if(mk===1&&c.nightStep){vals.push(d<=14?r[0]:r[1]);}
+else{vals.push(s+(e-s)*(d-1)/27);}
+}
+if(c.fall&&mk===0){vals[Math.min(n,27)-1]=e-0.05;}
+return vals;
+}
+function baseline(vals){
+var s=0;var n=Math.min(7,vals.length);
+for(var i=0;i<n;i++)s+=vals[i];
+return s/n;
+}
+function colorHex(c){return c==="r"?"#e53e3e":c==="y"?"#d69e2e":"#38a169";}
+function colorName(c){return c==="r"?"เร่งด่วน":c==="y"?"เฝ้าระวัง":"ปกติ";}
+
+/* === RENDER CASE BUTTONS === */
+var caseBtns=document.getElementById("caseBtns");
+ORDER.forEach(function(idx){
+var c=CASES[idx];
+var b=document.createElement("button");
+b.type="button";b.className="case-btn";
+b.setAttribute("data-idx",idx);
+b.setAttribute("aria-label",c.id+" "+c.name+" "+colorName(c.color));
+var dot=document.createElement("span");
+dot.className="dot dot-"+c.color;
+b.appendChild(dot);
+b.appendChild(document.createTextNode(c.id+" "+c.name));
+b.addEventListener("click",function(){selectCase(idx);});
+caseBtns.appendChild(b);
+});
+
+/* === METRIC BUTTONS === */
+var metricBtns=document.getElementById("metricBtns");
+METRICS.forEach(function(m,i){
+var b=document.createElement("button");
+b.type="button";b.className="case-btn";
+b.setAttribute("data-mi",i);
+b.textContent=m.name+" ("+m.unit+")";
+b.addEventListener("click",function(){selMetric=i;renderChart();updateMetricBtns();});
+metricBtns.appendChild(b);
+});
+
+function updateCaseBtns(){
+var bs=caseBtns.querySelectorAll("button");
+bs.forEach(function(b){b.classList.toggle("active",parseInt(b.getAttribute("data-idx"))===selCase);});
+}
+function updateMetricBtns(){
+var bs=metricBtns.querySelectorAll("button");
+bs.forEach(function(b){b.classList.toggle("active",parseInt(b.getAttribute("data-mi"))===selMetric);});
+}
+
+function selectCase(idx){
+selCase=idx;updateCaseBtns();renderChart();updateWhy();updateFamily();
+}
+
+/* === SVG CHART === */
+function renderChart(){
+var svg=document.getElementById("chart");
+var c=CASES[selCase];var m=METRICS[selMetric];
+var vals=genValues(c,selMetric);
+var bl=baseline(vals);var tol=m.tol;
+var n=vals.length;
+var W=600,H=200,padL=55,padR=15,padT=20,padB=35;
+var plotW=W-padL-padR, plotH=H-padT-padB;
+var allV=vals.concat([bl+tol,bl-tol]);
+var mn=Math.min.apply(null,allV), mx=Math.max.apply(null,allV);
+var range=mx-mn||1;mn-=range*.1;mx+=range*.1;range=mx-mn;
+function x(i){return padL+(i/(n-1||1))*plotW;}
+function y(v){return padT+(1-(v-mn)/range)*plotH;}
+var html='<rect x="0" y="0" width="640" height="260" fill="#162038" rx="4"/>';
+html+='<text x="'+padL+'" y="14" fill="rgba(255,255,255,.5)" font-size="11">'+c.id+' '+c.name+' — '+m.name+' ('+m.unit+')'+(c.days===7?' [กำลังเรียนรู้ค่าพื้นฐาน]':'')+'</text>';
+for(var g=0;g<5;g++){
+var gv=mn+range*g/4;var gy=y(gv);
+html+='<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="rgba(255,255,255,.06)" stroke-width="1"/>';
+html+='<text x="'+(padL-6)+'" y="'+(gy+4)+'" fill="rgba(255,255,255,.4)" font-size="10" text-anchor="end">'+gv.toFixed(m.dec)+'</text>';
+}
+var bly=y(bl);
+html+='<line x1="'+padL+'" y1="'+bly+'" x2="'+(W-padR)+'" y2="'+bly+'" stroke="#1a9e8f" stroke-width="1" stroke-dasharray="6 3" opacity=".6"/>';
+html+='<text x="'+(W-padR+2)+'" y="'+(bly-3)+'" fill="#1a9e8f" font-size="9">baseline</text>';
+var uy=y(bl+tol),ly=y(bl-tol);
+html+='<rect x="'+padL+'" y="'+uy+'" width="'+plotW+'" height="'+(ly-uy)+'" fill="#1a9e8f" opacity=".07"/>';
+var pts=[];for(var i=0;i<n;i++){pts.push(x(i).toFixed(1)+","+y(vals[i]).toFixed(1));}
+html+='<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+colorHex(c.color)+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+for(var i=0;i<n;i++){
+if(i===0||i===n-1||(c.fall&&i===n-2)){
+html+='<circle cx="'+x(i).toFixed(1)+'" cy="'+y(vals[i]).toFixed(1)+'" r="4" fill="'+colorHex(c.color)+'" stroke="#162038" stroke-width="1.5"/>';
+html+='<text x="'+x(i).toFixed(1)+'" y="'+(y(vals[i])-8).toFixed(1)+'" fill="rgba(255,255,255,.8)" font-size="10" text-anchor="middle">'+vals[i].toFixed(m.dec)+'</text>';
+}
+}
+for(var d=0;d<n;d+=7){
+html+='<text x="'+x(d).toFixed(1)+'" y="'+(H-padB+18)+'" fill="rgba(255,255,255,.4)" font-size="10" text-anchor="middle">วัน '+(d+1)+'</text>';
+}
+if(c.fall&&selMetric===0){
+var fx=x(Math.min(n,27)-2);
+html+='<text x="'+fx.toFixed(1)+'" y="'+(padT+12)+'" fill="#e53e3e" font-size="10" text-anchor="middle">⚠ ล้ม</text>';
+}
+html+='<text x="'+(padL+plotW/2)+'" y="'+(H-2)+'" fill="rgba(255,255,255,.35)" font-size="9" text-anchor="middle">ข้อมูลจำลอง — สีไม่ใช่การรับประกันทางคลินิก</text>';
+svg.innerHTML=html;
+}
+
+function updateWhy(){
+var c=CASES[selCase];
+var box=document.getElementById("whyBox");
+box.textContent="ทำไมจัดลำดับนี้? — "+c.id+" "+c.name+" ("+c.label+") : "+c.event+" · factors เป็นค่าตัวอย่าง สีไม่ใช่การรับประกันทางคลินิก";
+}
+
+function updateFamily(){
+var c=CASES[selCase];
+document.getElementById("fpStatus").textContent=c.label.charAt(0);
+document.getElementById("fpName").textContent=c.name+" ("+c.age+" ปี)";
+var msg=document.getElementById("fpMsg");
+msg.textContent="สถานะ: "+colorName(c.color)+" — "+c.event+" · ข้อมูลจำลอง ไม่มีปุ่มฉุกเฉิน (C7)";
+}
+
+/* === VISIT DIALOG === */
+var overlay=document.getElementById("dlgOverlay");
+var dlgBox=document.getElementById("dlgBox");
+var dlgNote=document.getElementById("dlgNote");
+var dlgErr=document.getElementById("dlgErr");
+var visitBtn=document.getElementById("visitBtn");
+var dlgSave=document.getElementById("dlgSave");
+var dlgCancel=document.getElementById("dlgCancel");
+var prevFocus=null;
+
+function openDlg(){
+dlgCase=selCase;
+var c=CASES[dlgCase];
+document.getElementById("dlgTitle").textContent="บันทึกเยี่ยมบ้าน — "+c.id+" "+c.name;
+var cbs=overlay.querySelectorAll('input[type="checkbox"]');
+cbs.forEach(function(cb){cb.checked=false;});
+dlgNote.value="";dlgErr.textContent="";
+prevFocus=document.activeElement;
+overlay.style.display="flex";dlgOpen=true;
+dlgBox.querySelector('input[type="checkbox"]').focus();
+}
+function closeDlg(){
+overlay.style.display="none";dlgOpen=false;
+if(prevFocus)prevFocus.focus();
+}
+
+visitBtn.addEventListener("click",openDlg);
+dlgCancel.addEventListener("click",closeDlg);
+overlay.addEventListener("click",function(ev){if(ev.target===overlay)closeDlg();});
+
+dlgSave.addEventListener("click",function(){
+var cbs=overlay.querySelectorAll('input[name="vc"]:checked');
+var note=dlgNote.value.trim();
+if(cbs.length<1||!note){
+dlgErr.textContent="กรุณาเลือกอย่างน้อย 1 รายการ และพิมพ์ข้อสังเกต";
+return;
+}
+var c=CASES[dlgCase];
+var items=[];cbs.forEach(function(cb){items.push(CHECKS[parseInt(cb.value)]);});
+var dup=history.some(function(h){return h.caseId===c.id&&h.note===note&&h.items.join(",")=== items.join(",");});
+if(dup){dlgErr.textContent="บันทึกนี้ซ้ำกับรายการที่มีอยู่แล้ว";return;}
+var entry={caseId:c.id,name:c.name,color:c.color,items:items,note:note,time:new Date().toLocaleTimeString("th-TH")};
+history.unshift(entry);
+closeDlg();renderHistory();
+});
+
+function renderHistory(){
+var panel=document.getElementById("historyPanel");
+var list=document.getElementById("historyList");
+if(history.length===0){panel.style.display="none";list.innerHTML="";return;}
+panel.style.display="block";
+list.innerHTML="";
+history.forEach(function(h){
+var div=document.createElement("div");
+div.className="history-item";
+var t=document.createElement("span");
+t.style.cssText="color:rgba(255,255,255,.85)";
+t.textContent=h.time+" "+h.caseId+" "+h.name+" ("+colorName(h.color)+") — "+h.items.join(", ");
+div.appendChild(t);
+var n=document.createElement("p");
+n.style.cssText="font-size:13px;color:rgba(255,255,255,.55);margin:4px 0 0";
+n.textContent="บันทึก: "+h.note;
+div.appendChild(n);
+var note2=document.createElement("p");
+note2.style.cssText="font-size:11px;color:rgba(255,255,255,.35);margin:2px 0 0";
+note2.textContent="การเยี่ยมไม่เปลี่ยนสถานะสี — สีเปลี่ยนจากเซ็นเซอร์เท่านั้น";
+div.appendChild(note2);
+list.appendChild(div);
+});
+}
+
+/* === RESET === */
+document.getElementById("resetBtn").addEventListener("click",function(){
+selCase=0;selMetric=0;history=[];
+renderHistory();selectCase(0);updateMetricBtns();
+});
+
+/* === KEYBOARD === */
+document.addEventListener("keydown",function(ev){
+if(dlgOpen&&ev.key==="Escape"){ev.preventDefault();closeDlg();return;}
+var tag=document.activeElement?document.activeElement.tagName:"";
+if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"||tag==="BUTTON")return;
+if(ev.key==="Escape"&&dlgOpen){closeDlg();}
+});
+
+/* === PROGRESS BAR === */
+var progBar=document.querySelector(".progress-bar");
+if(progBar){
+var progInner=document.createElement("div");
+progInner.style.cssText="height:100%;width:0%;background:linear-gradient(90deg,#1a9e8f,#22c4b2);transition:width .15s ease";
+progBar.appendChild(progInner);
+window.addEventListener("scroll",function(){
+var h=document.documentElement.scrollHeight-window.innerHeight;
+var pct=h>0?(window.scrollY/h)*100:0;
+progInner.style.width=Math.min(100,pct)+"%";
+},{passive:true});
+}
+
+/* === INIT === */
+selectCase(0);updateCaseBtns();updateMetricBtns();
+})();
+</script>
+
+<!-- LANFAO COMPLETE -->
+
+<!-- LANFAO PATCH — insert verbatim before </body> after existing </script> -->
+<style>
+/* (1) Filter buttons row */
+.filter-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.filter-btn{min-height:44px;padding:8px 16px;border-radius:8px;border:2px solid rgba(255,255,255,.12);background:transparent;color:#e8e8e8;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .15s ease,background .15s ease}
+.filter-btn:hover,.filter-btn.f-active{border-color:#22c4b2;background:rgba(26,158,143,.15)}
+.filter-btn:focus{outline:2px solid #22c4b2;outline-offset:2px}
+.filter-btn .fdot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.fdot-r{background:#e53e3e}.fdot-y{background:#d69e2e}.fdot-g{background:#38a169}.fdot-a{background:linear-gradient(135deg,#e53e3e,#d69e2e,#38a169)}
+.filter-status{font-size:13px;color:rgba(255,255,255,.55);margin:4px 0 8px;min-height:18px}
+/* (2) viewsGrid mobile */
+@media(max-width:768px){
+#viewsGrid{grid-template-columns:1fr !important;gap:24px}
+.demo-area{padding:16px}
+.dialog-box{padding:20px;margin:8px}
+}
+/* (3) Contrast fixes for muted text on navy */
+.band-dark .src,.band-dark .text-m{color:rgba(255,255,255,.6) !important}
+.band-dark .sec-sub{color:rgba(255,255,255,.65) !important}
+#chartWrap text{fill:rgba(255,255,255,.65)}
+#chartLabel{color:rgba(255,255,255,.55) !important}
+#whyBox{color:#5ee8d8 !important}
+.history-item span{color:rgba(255,255,255,.9) !important}
+.history-item p{color:rgba(255,255,255,.6) !important}
+/* (5) Reveal — content visible by default, animation progressive */
+.reveal{opacity:1;transform:none}
+@media(prefers-reduced-motion:no-preference){
+.p-reveal{animation:pReveal .45s ease-out both}
+@keyframes pReveal{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+}
+/* (4) Demo details collapse */
+.demo-preinfo{margin-bottom:16px}
+.demo-preinfo summary{color:#1a9e8f;font-weight:700;font-size:16px;min-height:44px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;padding:8px 0}
+.demo-preinfo summary::before{content:'▸';display:inline-block;transition:transform .2s ease;color:#1a9e8f}
+.demo-preinfo[open] summary::before{transform:rotate(90deg)}
+.demo-preinfo summary:focus{outline:2px solid #1a9e8f;outline-offset:2px}
+/* Focus trap dialog highlight */
+.dialog-box :focus{outline:2px solid #1a9e8f;outline-offset:2px}
+</style>
+
+<script>
+(function(){
+"use strict";
+/* === (1) FILTER BUTTONS === */
+var FILTER_MAP={
+all:null,
+r:["LF-001"],
+y:["LF-002","LF-003","LF-005"],
+g:["LF-004","LF-006"]
+};
+var FILTER_LABELS={
+all:{icon:"fdot-a",text:"ทั้งหมด (6)",status:"แสดงทุกเคส: 1🔴 3🟡 2🟢"},
+r:{icon:"fdot-r",text:"🔴 เร่งด่วน (1)",status:"LF-001 ยายสมศรี — ล้มวันที่ 27"},
+y:{icon:"fdot-y",text:"🟡 เฝ้าระวัง (3)",status:"LF-002 ตาประสิทธิ์ · LF-003 ยายบุญมี · LF-005 ยายนวล"},
+g:{icon:"fdot-g",text:"🟢 ปกติ (2)",status:"LF-004 ตาสมชาย · LF-006 ตาเฉลิม (กำลังเรียนรู้ค่าพื้นฐาน)"}
+};
+var caseBtns=document.getElementById("caseBtns");
+if(!caseBtns)return;
+var filterRow=document.createElement("div");
+filterRow.className="filter-row";
+filterRow.setAttribute("role","group");
+filterRow.setAttribute("aria-label","กรองตามสถานะ");
+var statusEl=document.createElement("div");
+statusEl.className="filter-status";
+statusEl.setAttribute("aria-live","polite");
+var activeFilter="all";
+
+["all","r","y","g"].forEach(function(key){
+var b=document.createElement("button");
+b.type="button";b.className="filter-btn";
+b.setAttribute("data-filter",key);
+var d=document.createElement("span");
+d.className="fdot "+FILTER_LABELS[key].icon;
+b.appendChild(d);
+b.appendChild(document.createTextNode(FILTER_LABELS[key].text));
+b.addEventListener("click",function(){applyFilter(key);});
+filterRow.appendChild(b);
+});
+
+caseBtns.parentNode.insertBefore(filterRow,caseBtns);
+caseBtns.parentNode.insertBefore(statusEl,caseBtns);
+
+function applyFilter(key){
+activeFilter=key;
+var ids=FILTER_MAP[key];
+var btns=caseBtns.querySelectorAll("button");
+btns.forEach(function(btn){
+var label=btn.getAttribute("aria-label")||"";
+var caseId=label.split(" ")[0];
+if(!ids){btn.style.display="";return;}
+btn.style.display=ids.indexOf(caseId)>=0?"":"none";
+});
+filterRow.querySelectorAll(".filter-btn").forEach(function(fb){
+fb.classList.toggle("f-active",fb.getAttribute("data-filter")===key);
+});
+statusEl.textContent=FILTER_LABELS[key].status;
+}
+applyFilter("all");
+
+/* === (4) MOVE PRE-DEMO CONTENT INTO DETAILS === */
+var demoEl=document.getElementById("demo");
+if(demoEl){
+var parent=demoEl.parentNode;
+var candidates=[];
+var node=parent.firstElementChild;
+var collecting=false;
+while(node){
+if(node.tagName==="H3"&&!collecting){
+var txt=node.textContent||"";
+if(txt.indexOf("แดชบอร์ด")>=0)collecting=true;
+}
+if(collecting&&node===demoEl)break;
+if(collecting)candidates.push(node);
+node=node.nextElementSibling;
+}
+if(candidates.length>0){
+var det=document.createElement("details");
+det.className="demo-preinfo";
+var sum=document.createElement("summary");
+sum.textContent="รายละเอียดการสาธิต";
+det.appendChild(sum);
+parent.insertBefore(det,demoEl);
+candidates.forEach(function(c){det.appendChild(c);});
+}
+}
+
+/* === (2) FOCUS TRAP FOR DIALOG === */
+var overlay=document.getElementById("dlgOverlay");
+var dlgBox=document.getElementById("dlgBox");
+if(overlay&&dlgBox){
+overlay.addEventListener("keydown",function(ev){
+if(ev.key!=="Tab")return;
+var focusable=dlgBox.querySelectorAll('button,input,textarea,[tabindex]:not([tabindex="-1"])');
+if(focusable.length===0)return;
+var first=focusable[0];
+var last=focusable[focusable.length-1];
+if(ev.shiftKey){
+if(document.activeElement===first){ev.preventDefault();last.focus();}
+}else{
+if(document.activeElement===last){ev.preventDefault();first.focus();}
+}
+});
+}
+
+/* === (5) REVEAL ANIMATION — progressive === */
+var rm=window.matchMedia("(prefers-reduced-motion: reduce)");
+if(!rm.matches){
+var revEls=document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+var obs=new IntersectionObserver(function(entries){
+entries.forEach(function(e){
+if(e.isIntersecting){e.target.classList.add("p-reveal");obs.unobserve(e.target);}
+});
+},{threshold:0.08});
+revEls.forEach(function(el){obs.observe(el);});
+}else{
+revEls.forEach(function(el){el.classList.add("p-reveal");});
+}
+}
+})();
+</script>
+<!-- END PATCH -->
+
+</body>
+</html>
